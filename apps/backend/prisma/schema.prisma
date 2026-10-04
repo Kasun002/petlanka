@@ -1,0 +1,12 @@
+// Prisma schema — defines the database structure.
+// No business entities yet. Add models as features are implemented.
+
+generator client {
+  provider     = "prisma-client-js"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
