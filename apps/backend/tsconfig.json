@@ -1,11 +1,7 @@
 {
   "extends": "@petlanka/tsconfig/nestjs.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "paths": {
-      "@petlanka/types": ["../../packages/types/src/index.ts"]
-    }
+    "outDir": "./dist"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*.spec.ts"]

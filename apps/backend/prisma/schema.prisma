@@ -1,6 +1,3 @@
-// Prisma schema — defines the database structure.
-// No business entities yet. Add models as features are implemented.
-
 generator client {
   provider     = "prisma-client-js"
   moduleFormat = "cjs"
@@ -9,4 +6,67 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum RoleName {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String?        @unique
+  phone         String?        @unique
+  firstName     String?
+  lastName      String?
+  isVerified    Boolean        @default(false)
+  isActive      Boolean        @default(true)
+  otpCodes      OtpCode[]
+  refreshTokens RefreshToken[] @relation("UserRefreshTokens")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([email])
+  @@index([phone])
+}
+
+model OtpCode {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  code      String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model Admin {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  role          RoleName       @default(ADMIN)
+  isActive      Boolean        @default(true)
+  refreshTokens RefreshToken[] @relation("AdminRefreshTokens")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  userId    String?
+  adminId   String?
+  user      User?     @relation("UserRefreshTokens", fields: [userId], references: [id], onDelete: Cascade)
+  admin     Admin?    @relation("AdminRefreshTokens", fields: [adminId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([adminId])
 }
