@@ -6,6 +6,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': new URL('./src', import.meta.url).pathname,
+      '@petlanka/types': new URL('../../packages/types/src/index.ts', import.meta.url).pathname,
     },
   },
   server: {

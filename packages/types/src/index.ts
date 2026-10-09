@@ -2,6 +2,7 @@
 // Only add types here that are genuinely shared (e.g. API response shapes).
 
 export * from './auth';
+export * from './validation';
 
 export interface ApiResponse<T> {
   data: T;

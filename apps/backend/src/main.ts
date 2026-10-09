@@ -16,10 +16,14 @@ async function bootstrap(): Promise<void> {
   // DTO validation
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
+  // CORS — allow local FE dev servers; set CORS_ORIGINS to real domains in production
+  const corsOrigins = (process.env['CORS_ORIGINS'] ?? '').split(',').filter(Boolean);
+  app.enableCors({ origin: corsOrigins, credentials: true });
+
   // Graceful shutdown
   app.enableShutdownHooks();
 
-  const port = process.env.PORT ?? 3000;
+  const port = process.env['PORT'] ?? 3000;
   await app.listen(port);
 }
 
