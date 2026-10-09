@@ -78,15 +78,15 @@ describe('AuthService', () => {
     });
 
     it('returns false for expired OTP', async () => {
-      prismaMock.otpCode.findFirst.mockResolvedValue(
-        makeOtp({ expiresAt: new Date(Date.now() - 1000) }),
-      );
+      // DB WHERE filters expiresAt > now, so findFirst returns null for expired records
+      prismaMock.otpCode.findFirst.mockResolvedValue(null);
       const result = await service.verifyOtp({ phone: '+94771234567' }, '123456');
       expect(result).toBe(false);
     });
 
     it('returns false for already-used OTP', async () => {
-      prismaMock.otpCode.findFirst.mockResolvedValue(makeOtp({ usedAt: new Date() }));
+      // DB WHERE filters usedAt: null, so findFirst returns null for used records
+      prismaMock.otpCode.findFirst.mockResolvedValue(null);
       const result = await service.verifyOtp({ phone: '+94771234567' }, '123456');
       expect(result).toBe(false);
     });

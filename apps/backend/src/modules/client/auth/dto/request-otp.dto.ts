@@ -1,4 +1,4 @@
-import { IsEmail, IsMobilePhone, IsOptional } from 'class-validator';
+import { IsEmail, IsMobilePhone, IsOptional, Matches } from 'class-validator';
 
 export class RequestOtpDto {
   @IsOptional()
@@ -8,4 +8,8 @@ export class RequestOtpDto {
   @IsOptional()
   @IsMobilePhone()
   phone?: string;
+
+  @IsOptional()
+  @Matches(/^(\d{9}[VXvx]|\d{12})$/, { message: 'invalid NIC format' })
+  nic?: string;
 }

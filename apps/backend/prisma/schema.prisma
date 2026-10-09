@@ -1,11 +1,10 @@
 generator client {
-  provider     = "prisma-client-js"
-  moduleFormat = "cjs"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum RoleName {
@@ -18,8 +17,12 @@ model User {
   id            String         @id @default(cuid())
   email         String?        @unique
   phone         String?        @unique
-  firstName     String?
-  lastName      String?
+  nic           String?        @unique
+  fullName      String?
+  province      String?
+  district      String?
+  city          String?
+  streetAddress String?
   isVerified    Boolean        @default(false)
   isActive      Boolean        @default(true)
   otpCodes      OtpCode[]
@@ -29,6 +32,7 @@ model User {
 
   @@index([email])
   @@index([phone])
+  @@index([nic])
 }
 
 model OtpCode {

@@ -41,7 +41,6 @@ export class AuthService {
     });
 
     if (!otp) return false;
-    if (otp.usedAt || otp.expiresAt < new Date()) return false;
     if (!(await bcrypt.compare(code, otp.code))) return false;
 
     await this.prisma.otpCode.update({

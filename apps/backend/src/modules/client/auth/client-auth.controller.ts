@@ -59,7 +59,7 @@ export class ClientAuthController {
     if (!user) throw new UnauthorizedException();
 
     const tokens = await this.auth.issueTokens(user.id, 'client');
-    return { ...tokens, isNewUser: !user.firstName };
+    return { ...tokens, isNewUser: !user.fullName };
   }
 
   @Post('register')
@@ -67,11 +67,19 @@ export class ClientAuthController {
   async register(
     @CurrentUser() user: AuthenticatedUser,
     @Body() dto: RegisterClientDto,
-  ): Promise<{ id: string; firstName: string | null; lastName: string | null }> {
+  ): Promise<{ id: string; fullName: string | null }> {
     return this.prisma.user.update({
       where: { id: user.id },
-      data: { firstName: dto.firstName, lastName: dto.lastName, isVerified: true },
-      select: { id: true, firstName: true, lastName: true },
+      data: {
+        fullName: dto.fullName,
+        nic: dto.nic,
+        province: dto.province,
+        district: dto.district,
+        city: dto.city,
+        streetAddress: dto.streetAddress,
+        isVerified: true,
+      },
+      select: { id: true, fullName: true },
     });
   }
 

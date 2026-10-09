@@ -74,7 +74,7 @@ describe('ClientAuthController', () => {
   describe('POST /v1/client/auth/otp/verify', () => {
     it('returns 201 with tokens and isNewUser=true for new user', async () => {
       authMock.verifyOtp.mockResolvedValue(true);
-      prismaMock.user.findFirst.mockResolvedValue({ id: 'user-1', firstName: null });
+      prismaMock.user.findFirst.mockResolvedValue({ id: 'user-1', fullName: null });
       authMock.issueTokens.mockResolvedValue({
         accessToken: 'acc',
         refreshToken: 'ref',
@@ -91,7 +91,7 @@ describe('ClientAuthController', () => {
 
     it('returns 201 with isNewUser=false for returning user', async () => {
       authMock.verifyOtp.mockResolvedValue(true);
-      prismaMock.user.findFirst.mockResolvedValue({ id: 'user-1', firstName: 'Kasun' });
+      prismaMock.user.findFirst.mockResolvedValue({ id: 'user-1', fullName: 'Kasun Perera' });
       authMock.issueTokens.mockResolvedValue({
         accessToken: 'acc',
         refreshToken: 'ref',
@@ -126,20 +126,25 @@ describe('ClientAuthController', () => {
   // ─── POST /v1/client/auth/register ─────────────────────────────────────────
 
   describe('POST /v1/client/auth/register', () => {
+    const validBody = {
+      fullName: 'Kasun Perera',
+      nic: '199512345678',
+      province: 'Western',
+      district: 'Colombo',
+      city: 'Colombo 1',
+      streetAddress: 'No. 45, Galle Road',
+    };
+
     it('returns 201 with updated user when authenticated', async () => {
-      prismaMock.user.update.mockResolvedValue({
-        id: 'user-1',
-        firstName: 'Kasun',
-        lastName: 'Dev',
-      });
+      prismaMock.user.update.mockResolvedValue({ id: 'user-1', fullName: 'Kasun Perera' });
 
       const res = await request(app.getHttpServer())
         .post('/v1/client/auth/register')
         .set('Authorization', 'Bearer mock.jwt.token')
-        .send({ firstName: 'Kasun', lastName: 'Dev' })
+        .send(validBody)
         .expect(201);
 
-      expect(res.body).toMatchObject({ firstName: 'Kasun', lastName: 'Dev' });
+      expect(res.body).toMatchObject({ fullName: 'Kasun Perera' });
     });
 
     it('returns 403 when guard blocks the request', async () => {
@@ -147,15 +152,24 @@ describe('ClientAuthController', () => {
 
       await request(app.getHttpServer())
         .post('/v1/client/auth/register')
-        .send({ firstName: 'Kasun', lastName: 'Dev' })
+        .send(validBody)
         .expect(403);
     });
 
-    it('returns 400 when firstName is missing', async () => {
+    it('returns 400 when fullName is missing', async () => {
+      const { fullName: _, ...body } = validBody;
       await request(app.getHttpServer())
         .post('/v1/client/auth/register')
         .set('Authorization', 'Bearer mock.jwt.token')
-        .send({ lastName: 'Dev' })
+        .send(body)
+        .expect(400);
+    });
+
+    it('returns 400 when NIC format is invalid', async () => {
+      await request(app.getHttpServer())
+        .post('/v1/client/auth/register')
+        .set('Authorization', 'Bearer mock.jwt.token')
+        .send({ ...validBody, nic: 'BADNIC' })
         .expect(400);
     });
   });
