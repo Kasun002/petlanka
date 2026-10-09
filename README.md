@@ -97,6 +97,12 @@ pnpm --filter @petlanka/backend db:migrate
 pnpm --filter @petlanka/backend db:generate
 ```
 
+### 6. Seed the database (creates SUPER_ADMIN)
+
+```bash
+pnpm --filter @petlanka/backend db:seed
+```
+
 ---
 
 ## Running applications
@@ -193,6 +199,10 @@ pnpm --filter @petlanka/e2e test:ui
 | `DATABASE_URL` | PostgreSQL connection string |
 | `PORT` | Backend port (default: 3000) |
 | `NODE_ENV` | `development` / `test` / `production` |
+| `JWT_SECRET` | Access token signing secret (min 32 chars) |
+| `JWT_REFRESH_SECRET` | Refresh token signing secret (min 32 chars) |
+| `SEED_ADMIN_EMAIL` | Email for the seeded SUPER_ADMIN account |
+| `SEED_ADMIN_PASSWORD` | Password for the seeded SUPER_ADMIN account |
 | `VITE_API_BASE_URL` | API base URL used by frontend apps |
 | `E2E_BASE_URL` | Backend base URL for E2E tests |
 | `E2E_CLIENT_URL` | Client app URL for E2E tests |

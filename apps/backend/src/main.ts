@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
@@ -12,6 +12,9 @@ async function bootstrap(): Promise<void> {
   app.enableVersioning({
     type: VersioningType.URI,
   });
+
+  // DTO validation
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   // Graceful shutdown
   app.enableShutdownHooks();

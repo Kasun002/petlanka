@@ -14,6 +14,20 @@ export default defineConfig({
   use: {
     trace: 'on-first-retry',
   },
+  webServer: [
+    {
+      command: 'pnpm --filter @petlanka/client dev',
+      url: clientUrl,
+      reuseExistingServer: true,
+      timeout: 30_000,
+    },
+    {
+      command: 'pnpm --filter @petlanka/admin dev',
+      url: adminUrl,
+      reuseExistingServer: true,
+      timeout: 30_000,
+    },
+  ],
   projects: [
     {
       name: 'api',
