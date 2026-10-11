@@ -1,5 +1,6 @@
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { logout } from '../services/api/auth';
 import dashboardData from '../data/dashboard.json';
 
 const { navBadges } = dashboardData;
@@ -67,16 +68,16 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-function NavItemRow({ item, exact }: { item: NavItem; exact?: boolean }) {
-  const location = useLocation();
-  const isActive = exact ? location.pathname === item.to : location.pathname.startsWith(item.to) && (item.to !== '/' || location.pathname === '/');
+function NavItemRow({ item }: { item: NavItem }) {
   return (
     <NavLink
       to={item.to}
       end={item.to === '/'}
-      className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-colors ${
-        isActive ? 'bg-[#E3F2ED] text-primary' : 'text-gray-700 hover:bg-surface'
-      }`}
+      className={({ isActive }) =>
+        `flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-colors ${
+          isActive ? 'bg-[#E3F2ED] text-primary' : 'text-gray-700 hover:bg-surface'
+        }`
+      }
     >
       {item.icon}
       <span className="flex-1">{item.label}</span>
@@ -100,6 +101,8 @@ export default function AdminShell() {
   const initials = displayName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
 
   const handleLogout = () => {
+    const rt = localStorage.getItem('refreshToken');
+    if (rt) logout(rt).catch(() => {}); // fire-and-forget; local state cleared regardless
     clearAuth();
     navigate('/login', { replace: true });
   };

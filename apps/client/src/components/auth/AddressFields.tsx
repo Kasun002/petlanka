@@ -1,6 +1,4 @@
-import provinces from '../../data/address/provinces.json';
-import districts from '../../data/address/districts.json';
-import cities from '../../data/address/cities.json';
+import { provinces, districts, cities } from '@petlanka/types';
 
 export interface AddressValue {
   province: string;
@@ -14,7 +12,7 @@ interface Props {
   onChange: (v: AddressValue) => void;
 }
 
-export default function AddressFields({ value, onChange }: Props) {
+export default function AddressFields({ value, onChange }: Readonly<Props>) {
   const selectedProvince = provinces.find((p) => p.name_en === value.province);
   const filteredDistricts = selectedProvince
     ? districts.filter((d) => d.province_id === selectedProvince.id)

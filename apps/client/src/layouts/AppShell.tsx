@@ -27,21 +27,10 @@ const NAV_LINKS = [
   { to: '/profile', label: 'Profile' },
 ];
 
-// ponytail: greeting name is a placeholder until /me endpoint provides user profile
-function useGreetingName(): string {
-  try {
-    const raw = localStorage.getItem('user');
-    if (!raw) return 'there';
-    const u = JSON.parse(raw) as { id?: string };
-    return u.id ? 'there' : 'there';
-  } catch {
-    return 'there';
-  }
-}
-
 export default function AppShell() {
   useAuth(); // ensure user is available (AuthRoute handles redirect if not)
-  const name = useGreetingName();
+  // ponytail: replace with user.fullName from /me when endpoint exists
+  const name = 'there';
 
   return (
     <div className="min-h-screen bg-surface flex flex-col font-body">

@@ -5,7 +5,7 @@ interface Props {
   applications: RecentApplication[];
 }
 
-export default function ApplicationsTable({ applications }: Props) {
+export default function ApplicationsTable({ applications }: Readonly<Props>) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-black/5">
       <div className="flex items-center justify-between px-5 py-[18px] border-b border-black/[0.06]">

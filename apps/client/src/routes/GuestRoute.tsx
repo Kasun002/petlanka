@@ -3,5 +3,5 @@ import { useAuth } from '../context/AuthContext';
 
 export default function GuestRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  return user ? <Navigate to="/" replace /> : <>{children}</>;
+  return user ? <Navigate to="/home" replace /> : <>{children}</>;
 }

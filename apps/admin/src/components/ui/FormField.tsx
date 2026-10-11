@@ -3,7 +3,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function FormField({ error, children }: Props) {
+export default function FormField({ error, children }: Readonly<Props>) {
   return (
     <div>
       {children}

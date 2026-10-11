@@ -42,7 +42,7 @@ export default function RegisterPage() {
   const onSubmit = handleSubmit(async ({ fullName, nic, address }) => {
     try {
       await registerClient({ fullName, nic, ...address });
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     } catch {
       setError('root', { message: 'Registration failed. Please try again.' });
     }

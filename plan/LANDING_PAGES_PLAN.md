@@ -346,7 +346,7 @@ Replace `<MainLayout>` with `<AppShell>`. Auth routes stay outside the shell.
 
 **Admin (`AdminShell`):** `LoginPage` writes `localStorage.setItem('adminDisplayName', firstName + ' ' + lastName)` after a successful login (uses the `AdminLoginResponse` fields). `AdminShell` reads it with `localStorage.getItem('adminDisplayName') ?? 'Admin'` and derives initials (first letter of each word, max 2). No changes to `AuthenticatedUser` type needed.
 
-**Client (`AppShell`):** `useGreetingName()` hook returns `'there'` until a `/me` endpoint exists. Desktop avatar initials are hardcoded `'KP'`. Both marked with `ponytail:` comments for future replacement.
+**Client (`AppShell`):** `const name = 'there'` — inline placeholder until `/me` endpoint exists (audit fix: `useGreetingName()` 9-line function removed). Desktop avatar initials hardcoded `'KP'`, marked with `ponytail:` comment.
 
 ---
 
@@ -380,7 +380,7 @@ Replace `<MainLayout>` with `<AppShell>`. Auth routes stay outside the shell.
 | `apps/client/tailwind.config.js` | Update `surface` to `#F5F3EC`, add `orange`, `muted`, font families |
 | `apps/client/src/index.css` | Add Google Fonts import (Sora + Work Sans) |
 | `apps/client/src/layouts/AppShell.tsx` | **New** — replaces `MainLayout.tsx` |
-| `apps/client/src/layouts/MainLayout.tsx` | Left unused, not deleted |
+| `apps/client/src/layouts/MainLayout.tsx` | **Deleted** (audit) |
 | `apps/client/src/components/ui/Card.tsx` | **New** |
 | `apps/client/src/components/ui/StatusBadge.tsx` | **New** |
 | `apps/client/src/components/home/RegisterPetBanner.tsx` | **New** |
@@ -394,7 +394,7 @@ Replace `<MainLayout>` with `<AppShell>`. Auth routes stay outside the shell.
 | `apps/admin/tailwind.config.js` | Update `surface`, add `orange`, `muted`, font families |
 | `apps/admin/src/index.css` | Add Google Fonts import (Sora + Work Sans) |
 | `apps/admin/src/layouts/AdminShell.tsx` | **New** — replaces `MainLayout.tsx` |
-| `apps/admin/src/layouts/MainLayout.tsx` | Left unused, not deleted |
+| `apps/admin/src/layouts/MainLayout.tsx` | **Deleted** (audit) |
 | `apps/admin/src/components/ui/Card.tsx` | **New** |
 | `apps/admin/src/components/ui/StatusBadge.tsx` | **New** |
 | `apps/admin/src/components/dashboard/StatCard.tsx` | **New** |
@@ -406,6 +406,44 @@ Replace `<MainLayout>` with `<AppShell>`. Auth routes stay outside the shell.
 | `apps/admin/src/pages/auth/LoginPage.tsx` | Updated — `localStorage.setItem('adminDisplayName', ...)` after login |
 | `apps/client/src/pages/HomePage.spec.tsx` | Updated — wrapped with `<MemoryRouter>`, assertions target "My pets" + "Notifications" headings |
 | `apps/admin/src/pages/DashboardPage.spec.tsx` | Updated — assertions changed to `getByText('Registered pets')` + `getByText('Recent applications')` |
+| `packages/types/src/data/provinces.json` | **New** — moved from `apps/backend/src/modules/address/data/` and `apps/client/src/data/address/` |
+| `packages/types/src/data/districts.json` | **New** — moved (see above) |
+| `packages/types/src/data/cities.json` | **New** — moved (see above) |
+| `packages/types/src/index.ts` | Updated — re-exports `provinces`, `districts`, `cities` |
+| `apps/client/src/data/address/` (3 files) | **Deleted** (audit) — moved to `@petlanka/types` |
+| `apps/backend/src/modules/address/data/` (3 files) | **Deleted** (audit) — moved to `@petlanka/types` |
+| `apps/client/src/components/auth/AddressFields.tsx` | Updated (audit) — imports from `@petlanka/types` |
+| `apps/backend/src/modules/address/dto/address.dto.ts` | Updated (audit) — imports from `@petlanka/types` |
+| `apps/client/src/routes/GuestRoute.tsx` | **Bug fix** — redirect `"/"` → `"/home"` (was infinite redirect loop) |
+| `apps/client/src/pages/auth/RegisterPage.tsx` | **Bug fix** — `navigate("/")` → `navigate("/home")` after registration |
+| `apps/admin/src/layouts/AdminShell.tsx` | **Bug fix + audit** — logout calls `POST /logout` API; `NavItemRow` dead `useLocation`/`isActive`/`exact` removed |
+| `apps/client/src/layouts/AppShell.tsx` | **Audit** — `useGreetingName()` removed; `const name = 'there'` inline |
+
+---
+
+## Audit & Fixes
+
+Post-implementation audit found and fixed the following issues. `pnpm typecheck` and both test suites pass clean after all fixes.
+
+### Bugs
+
+| Issue | File | Fix |
+| --- | --- | --- |
+| Infinite redirect loop | `apps/client/src/routes/GuestRoute.tsx` | Authenticated users redirected to `"/"` (WelcomePage, also wrapped in `GuestRoute`) → loop. Changed to `"/home"`. |
+| Same loop on register | `apps/client/src/pages/auth/RegisterPage.tsx` | `navigate("/")` after successful registration hit the same loop. Changed to `navigate("/home")`. |
+| Refresh token not revoked | `apps/admin/src/layouts/AdminShell.tsx` | `handleLogout` only called `clearAuth()`. Now fire-and-forgets `logout(refreshToken)` so the DB record is revoked. |
+
+### Monorepo violation — duplicate address data
+
+`provinces.json`, `districts.json`, `cities.json` existed in both `apps/client/src/data/address/` and `apps/backend/src/modules/address/data/`. Moved to `packages/types/src/data/`, re-exported from `@petlanka/types`. Both consumers updated. Old dirs deleted.
+
+### Dead code removed
+
+| Location | Removed |
+| --- | --- |
+| `AdminShell.tsx NavItemRow` | `useLocation()`, `const isActive`, `exact?` prop — `NavLink` already provides `isActive` in its `className` callback |
+| `AppShell.tsx` | `useGreetingName()` (9-line fn always returning `'there'`) → `const name = 'there'` |
+| Both apps | `MainLayout.tsx` orphaned scaffolding (never imported after shell replacements) |
 
 ---
 
