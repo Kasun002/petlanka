@@ -4,7 +4,7 @@ interface Props {
   placeholder?: string;
 }
 
-export default function PhoneInput({ value, onChange, placeholder = '77 123 4567' }: Props) {
+export default function PhoneInput({ value, onChange, placeholder = '77 123 4567' }: Readonly<Props>) {
   const digits = value.startsWith('+94') ? value.slice(3) : value;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

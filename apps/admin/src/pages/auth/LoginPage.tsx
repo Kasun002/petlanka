@@ -31,6 +31,7 @@ export default function LoginPage() {
         { id: res.admin.id, type: 'admin', role: res.admin.role },
         { accessToken: res.accessToken, refreshToken: res.refreshToken },
       );
+      localStorage.setItem('adminDisplayName', `${res.admin.firstName} ${res.admin.lastName}`);
       navigate('/', { replace: true });
     } catch {
       setError('root', { message: 'Invalid email or password' });

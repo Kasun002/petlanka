@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
+import AdminShell from '../layouts/AdminShell';
 import DashboardPage from '../pages/DashboardPage';
 import LoginPage from '../pages/auth/LoginPage';
 import AuthRoute from '../routes/AuthRoute';
@@ -9,8 +9,9 @@ export default function App(): React.JSX.Element {
   return (
     <Routes>
       <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
-      <Route element={<MainLayout />}>
+      <Route element={<AdminShell />}>
         <Route path="/" element={<AuthRoute><DashboardPage /></AuthRoute>} />
+        {/* future: /applications, /pets, /assign, /users, /settings */}
       </Route>
     </Routes>
   );

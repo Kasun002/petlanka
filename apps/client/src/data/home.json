@@ -1,0 +1,12 @@
+{
+  "pets": [
+    { "id": "1", "name": "Simba", "species": "Cat", "breed": "Domestic Shorthair", "status": "ACTIVE",   "statusLabel": "Active" },
+    { "id": "2", "name": "Rocky", "species": "Dog", "breed": "Sri Lankan Mix",      "status": "EXPIRES", "statusLabel": "Expires 12 Oct" },
+    { "id": "3", "name": "Milo",  "species": "Dog", "breed": "Labrador Mix",        "status": "PENDING", "statusLabel": "Pending" }
+  ],
+  "notifications": [
+    { "id": "n1", "type": "action",   "title": "The officer needs more from you on Milo's application",  "subtitle": "2 documents & 2 questions — tap to respond", "route": "/action/n1" },
+    { "id": "n2", "type": "reminder", "title": "Rocky's licence expires in 21 days",                     "subtitle": "Renew now to avoid a late fee",               "route": "/apply"     },
+    { "id": "n3", "type": "success",  "title": "Simba's licence was approved",                           "subtitle": "2 days ago",                                 "route": "/pets/1"    }
+  ]
+}

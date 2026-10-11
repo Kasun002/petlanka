@@ -46,7 +46,7 @@ export default function OtpVerifyPage() {
       );
       // ponytail: id is empty until a /me endpoint exists — sub is in the JWT but not decoded here
       setAuth({ id: '', type: 'client' }, { accessToken: res.accessToken, refreshToken: res.refreshToken });
-      navigate(res.isNewUser ? '/register' : '/', { replace: true });
+      navigate(res.isNewUser ? '/register' : '/home', { replace: true });
     } catch {
       setApiError('Invalid or expired code. Please try again.');
     }
