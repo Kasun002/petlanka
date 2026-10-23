@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import type { OtpVerifyRouteState } from '@petlanka/types';
 import OtpInput from '../../components/auth/OtpInput';
 import FormField from '../../components/ui/FormField';
@@ -15,6 +16,7 @@ export default function OtpVerifyPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { setAuth } = useAuth();
+  const { t } = useTranslation('auth');
   const routeState = location.state as OtpVerifyRouteState | null;
 
   const [apiError, setApiError] = useState('');
@@ -30,8 +32,8 @@ export default function OtpVerifyPage() {
 
   useEffect(() => {
     if (resendCooldown <= 0) return;
-    const t = setInterval(() => setResendCooldown((c) => c - 1), 1000);
-    return () => clearInterval(t);
+    const timer = setInterval(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearInterval(timer);
   }, [resendCooldown]);
 
   if (!routeState) return null;
@@ -48,7 +50,7 @@ export default function OtpVerifyPage() {
       setAuth({ id: '', type: 'client' }, { accessToken: res.accessToken, refreshToken: res.refreshToken });
       navigate(res.isNewUser ? '/register' : '/home', { replace: true });
     } catch {
-      setApiError('Invalid or expired code. Please try again.');
+      setApiError(t('otp.invalidCode'));
     }
   });
 
@@ -62,7 +64,7 @@ export default function OtpVerifyPage() {
       );
       setResendCooldown(60);
     } catch {
-      setApiError('Failed to resend. Please try again.');
+      setApiError(t('otp.resendFailed'));
     }
   };
 
@@ -70,9 +72,9 @@ export default function OtpVerifyPage() {
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-6">
       <div className="w-full max-w-sm space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Verify code</h1>
+          <h1 className="text-2xl font-bold text-gray-900">{t('otp.title')}</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Enter the 6-digit code sent to{' '}
+            {t('otp.subtitle')}{' '}
             <span className="font-medium text-gray-700">{routeState.identifier}</span>
           </p>
         </div>
@@ -83,8 +85,8 @@ export default function OtpVerifyPage() {
               name="code"
               control={control}
               rules={{
-                required: 'Enter the 6-digit code',
-                minLength: { value: 6, message: 'Enter all 6 digits' },
+                required: t('otp.codeRequired'),
+                minLength: { value: 6, message: t('otp.allDigits') },
               }}
               render={({ field }) => (
                 <OtpInput value={field.value} onChange={field.onChange} />
@@ -99,7 +101,7 @@ export default function OtpVerifyPage() {
             disabled={isSubmitting}
             className="w-full bg-primary text-white py-4 rounded-2xl text-base font-semibold hover:bg-primary-dark disabled:opacity-60 transition-colors"
           >
-            {isSubmitting ? 'Verifying…' : 'Verify & continue'}
+            {isSubmitting ? t('otp.verifying') : t('otp.verify')}
           </button>
         </form>
 
@@ -110,7 +112,7 @@ export default function OtpVerifyPage() {
             disabled={resendCooldown > 0}
             className="text-sm text-primary disabled:text-gray-400"
           >
-            {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend code'}
+            {resendCooldown > 0 ? t('otp.resendIn', { count: resendCooldown }) : t('otp.resend')}
           </button>
         </div>
       </div>

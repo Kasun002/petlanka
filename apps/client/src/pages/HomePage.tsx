@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import homeData from '../data/home.json';
 import type { HomePet, HomeNotification } from '../types/home';
 import RegisterPetBanner from '../components/home/RegisterPetBanner';
@@ -9,14 +10,16 @@ const pets = homeData.pets as HomePet[];
 const notifications = homeData.notifications as HomeNotification[];
 
 export default function HomePage() {
+  const { t } = useTranslation('home');
+
   return (
     <div className="px-5 pt-[18px] pb-4 md:max-w-[1180px] md:mx-auto md:px-10 md:pt-8">
 
       {/* Desktop: greeting header row */}
       <div className="hidden md:flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-[24px] font-bold font-display">Good morning</h1>
-          <p className="text-[13.5px] text-[#6E6A5F] mt-1">Here's what's happening with your pets.</p>
+          <h1 className="text-[24px] font-bold font-display">{t('greeting')}</h1>
+          <p className="text-[13.5px] text-[#6E6A5F] mt-1">{t('subtitle')}</p>
         </div>
         <RegisterPetBanner compact />
       </div>
@@ -32,8 +35,8 @@ export default function HomePage() {
         {/* My pets */}
         <div>
           <div className="flex items-center justify-between mb-2.5">
-            <h2 className="text-[15px] font-bold">My pets</h2>
-            <button className="text-[12.5px] text-primary font-semibold">View all</button>
+            <h2 className="text-[15px] font-bold">{t('myPets')}</h2>
+            <button className="text-[12.5px] text-primary font-semibold">{t('viewAll')}</button>
           </div>
           {/* Mobile: horizontal scroll; Desktop: 2-col grid */}
           <div className="flex gap-3 overflow-x-auto pb-1.5 mb-5 md:overflow-visible md:grid md:grid-cols-2">
@@ -43,7 +46,7 @@ export default function HomePage() {
 
         {/* Notifications */}
         <div>
-          <h2 className="text-[15px] font-bold mb-2.5">Notifications</h2>
+          <h2 className="text-[15px] font-bold mb-2.5">{t('notifications')}</h2>
           <div className="bg-white rounded-2xl shadow-sm border border-black/5 overflow-hidden">
             {notifications.map((n, i) => (
               <NotificationItem

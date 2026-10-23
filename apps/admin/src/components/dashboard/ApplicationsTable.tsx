@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { RecentApplication } from '../../types/dashboard';
 import StatusBadge from '../ui/StatusBadge';
 
@@ -6,22 +7,24 @@ interface Props {
 }
 
 export default function ApplicationsTable({ applications }: Readonly<Props>) {
+  const { t } = useTranslation('dashboard');
+
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-black/5">
       <div className="flex items-center justify-between px-5 py-[18px] border-b border-black/[0.06]">
-        <h2 className="text-[15px] font-bold">Recent applications</h2>
-        <button className="text-[12.5px] text-primary font-semibold">View all →</button>
+        <h2 className="text-[15px] font-bold">{t('recentApplications')}</h2>
+        <button className="text-[12.5px] text-primary font-semibold">{t('viewAll')}</button>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-[13px]">
           <thead>
             <tr className="text-left text-[11.5px] font-semibold text-muted border-b border-black/[0.06]">
-              <th className="px-5 py-3 font-semibold">Applicant</th>
-              <th className="px-4 py-3 font-semibold">Pet</th>
-              <th className="px-4 py-3 font-semibold">Type</th>
-              <th className="px-4 py-3 font-semibold">District</th>
-              <th className="px-4 py-3 font-semibold">Submitted</th>
-              <th className="px-4 py-3 font-semibold">Status</th>
+              <th className="px-5 py-3 font-semibold">{t('table.applicant')}</th>
+              <th className="px-4 py-3 font-semibold">{t('table.pet')}</th>
+              <th className="px-4 py-3 font-semibold">{t('table.type')}</th>
+              <th className="px-4 py-3 font-semibold">{t('table.district')}</th>
+              <th className="px-4 py-3 font-semibold">{t('table.submitted')}</th>
+              <th className="px-4 py-3 font-semibold">{t('table.status')}</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
@@ -40,7 +43,7 @@ export default function ApplicationsTable({ applications }: Readonly<Props>) {
                   <StatusBadge status={app.status} />
                 </td>
                 <td className="px-4 py-3.5">
-                  <button className="text-[12.5px] text-primary font-semibold hover:underline">Review</button>
+                  <button className="text-[12.5px] text-primary font-semibold hover:underline">{t('review')}</button>
                 </td>
               </tr>
             ))}

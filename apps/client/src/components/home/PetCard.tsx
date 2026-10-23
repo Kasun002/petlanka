@@ -29,7 +29,7 @@ export default function PetCard({ pet }: Props) {
       <div>
         <p className="font-bold text-[14px]">{pet.name}</p>
         <p className="text-[11.5px] text-muted mt-0.5 mb-2">{pet.breed}</p>
-        <StatusBadge status={pet.status} label={pet.statusLabel} />
+        <StatusBadge status={pet.status} />
       </div>
     </div>
   );

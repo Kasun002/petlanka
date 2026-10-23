@@ -1,67 +1,74 @@
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { logout } from '../services/api/auth';
 import dashboardData from '../data/dashboard.json';
 
 const { navBadges } = dashboardData;
 
-const PAGE_TITLES: Record<string, string> = {
-  '/': 'Dashboard',
-  '/applications': 'Applications',
-  '/pets': 'Pet Registry',
-  '/owners': 'Owners',
-  '/reports': 'Reports',
-  '/assign': 'Assign Requests',
-  '/users': 'Users & Roles',
-  '/settings': 'Settings',
+const LANGS = [
+  { code: 'en', label: 'EN' },
+  { code: 'si', label: 'සි' },
+  { code: 'ta', label: 'த' },
+];
+
+const PAGE_TITLE_KEYS: Record<string, string> = {
+  '/': 'nav.dashboard',
+  '/applications': 'nav.applications',
+  '/pets': 'nav.petRegistry',
+  '/owners': 'nav.owners',
+  '/reports': 'nav.reports',
+  '/assign': 'nav.assignRequests',
+  '/users': 'nav.usersRoles',
+  '/settings': 'nav.settings',
 };
 
-type NavItem = { to: string; label: string; badge?: number; icon: React.ReactNode };
-type NavGroup = { heading?: string; items: NavItem[] };
+type NavItem = { to: string; labelKey: string; badge?: number; icon: React.ReactNode };
+type NavGroup = { headingKey?: string; items: NavItem[] };
 
 const NAV_GROUPS: NavGroup[] = [
   {
     items: [
       {
-        to: '/', label: 'Dashboard',
+        to: '/', labelKey: 'nav.dashboard',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.3" /><rect x="13.5" y="3.5" width="7" height="7" rx="1.3" /><rect x="3.5" y="13.5" width="7" height="7" rx="1.3" /><rect x="13.5" y="13.5" width="7" height="7" rx="1.3" /></svg>,
       },
       {
-        to: '/applications', label: 'Applications', badge: navBadges.applications,
+        to: '/applications', labelKey: 'nav.applications', badge: navBadges.applications,
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 13.5 6.5 5h11L20 13.5" /><path d="M4 13.5v5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-5" /><path d="M4 13.5h4.5l1 2h5l1-2H20" /></svg>,
       },
       {
-        to: '/pets', label: 'Pet Registry',
+        to: '/pets', labelKey: 'nav.petRegistry',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="7" cy="8.5" r="1.5" /><circle cx="12" cy="6" r="1.5" /><circle cx="17" cy="8.5" r="1.5" /><path d="M8.5 13.2c-2 .6-3.2 2.2-3 4 .2 1.8 1.8 2.8 3.5 2.2.9-.3 1.7-.3 2.6 0l.4.1c.9.3 1.7.3 2.6 0 1.7-.6 3.3-1.6 3.5-3.4.2-1.8-1-3.4-3-4-2.1-.6-4.5-.6-6.6 0Z" /></svg>,
       },
       {
-        to: '/owners', label: 'Owners',
+        to: '/owners', labelKey: 'nav.owners',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="8" r="3" /><path d="M2.5 19c1-3.2 3.4-5 6.5-5s5.5 1.8 6.5 5" /><circle cx="18" cy="9" r="2.3" /><path d="M15.5 14.2c2.2.4 3.8 1.9 4.5 4.3" /></svg>,
       },
       {
-        to: '/reports', label: 'Reports',
+        to: '/reports', labelKey: 'nav.reports',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M20 20H4" /></svg>,
       },
     ],
   },
   {
-    heading: 'Operations',
+    headingKey: 'nav.operations',
     items: [
       {
-        to: '/assign', label: 'Assign Requests', badge: navBadges.assignRequests,
+        to: '/assign', labelKey: 'nav.assignRequests', badge: navBadges.assignRequests,
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="4.5" width="14" height="16" rx="2" /><path d="M9 4.5V3.8A1.8 1.8 0 0 1 10.8 2h2.4A1.8 1.8 0 0 1 15 3.8v.7" /><path d="M8.7 13.2l2.1 2.1L15.3 11" /></svg>,
       },
     ],
   },
   {
-    heading: 'Administration',
+    headingKey: 'nav.administration',
     items: [
       {
-        to: '/users', label: 'Users & Roles',
+        to: '/users', labelKey: 'nav.usersRoles',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="8" r="3" /><path d="M2.5 19c1-3.2 3.4-5 6.5-5s5.5 1.8 6.5 5" /><path d="M16.8 10.3l3.2-1.2v2.7c0 2.4-1.3 3.9-3.2 4.6-1.9-.7-3.2-2.2-3.2-4.6V9.1l3.2 1.2Z" /></svg>,
       },
       {
-        to: '/settings', label: 'Settings',
+        to: '/settings', labelKey: 'nav.settings',
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 13.5a1.5 1.5 0 0 0 .3 1.7l.1.1a1.8 1.8 0 1 1-2.6 2.6l-.1-.1a1.5 1.5 0 0 0-1.7-.3 1.5 1.5 0 0 0-.9 1.4v.2a1.8 1.8 0 1 1-3.7 0v-.1a1.5 1.5 0 0 0-1-1.4 1.5 1.5 0 0 0-1.7.3l-.1.1a1.8 1.8 0 1 1-2.6-2.6l.1-.1a1.5 1.5 0 0 0 .3-1.7 1.5 1.5 0 0 0-1.4-.9h-.2a1.8 1.8 0 1 1 0-3.7h.1a1.5 1.5 0 0 0 1.4-1 1.5 1.5 0 0 0-.3-1.7l-.1-.1A1.8 1.8 0 1 1 7.9 3.7l.1.1a1.5 1.5 0 0 0 1.7.3H10a1.5 1.5 0 0 0 .9-1.4v-.2a1.8 1.8 0 1 1 3.7 0v.1a1.5 1.5 0 0 0 .9 1.4h.1a1.5 1.5 0 0 0 1.7-.3l.1-.1a1.8 1.8 0 1 1 2.6 2.6l-.1.1a1.5 1.5 0 0 0-.3 1.7v.1a1.5 1.5 0 0 0 1.4.9h.2a1.8 1.8 0 1 1 0 3.7h-.1a1.5 1.5 0 0 0-1.4.9Z" /></svg>,
       },
     ],
@@ -69,6 +76,7 @@ const NAV_GROUPS: NavGroup[] = [
 ];
 
 function NavItemRow({ item }: { item: NavItem }) {
+  const { t } = useTranslation('shell');
   return (
     <NavLink
       to={item.to}
@@ -80,7 +88,7 @@ function NavItemRow({ item }: { item: NavItem }) {
       }
     >
       {item.icon}
-      <span className="flex-1">{item.label}</span>
+      <span className="flex-1">{t(item.labelKey)}</span>
       {item.badge !== undefined && (
         <span className="bg-orange text-white text-[10.5px] font-bold px-1.5 py-px rounded-[6px]">
           {item.badge}
@@ -94,7 +102,9 @@ export default function AdminShell() {
   const { clearAuth } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const pageTitle = PAGE_TITLES[location.pathname] ?? 'Admin';
+  const { t, i18n } = useTranslation('shell');
+
+  const pageTitle = t(PAGE_TITLE_KEYS[location.pathname] ?? 'nav.dashboard');
 
   // ponytail: display name stored at login; replace with user context when /me exists
   const displayName = localStorage.getItem('adminDisplayName') ?? 'Admin';
@@ -105,6 +115,11 @@ export default function AdminShell() {
     if (rt) logout(rt).catch(() => {}); // fire-and-forget; local state cleared regardless
     clearAuth();
     navigate('/login', { replace: true });
+  };
+
+  const changeLang = (code: string) => {
+    i18n.changeLanguage(code);
+    document.documentElement.lang = code;
   };
 
   return (
@@ -123,9 +138,9 @@ export default function AdminShell() {
 
         {NAV_GROUPS.map((group, gi) => (
           <div key={gi} className={gi > 0 ? 'mt-2' : ''}>
-            {group.heading && (
+            {group.headingKey && (
               <p className="text-[10.5px] font-bold text-muted tracking-wide uppercase px-[14px] mt-4 mb-1.5">
-                {group.heading}
+                {t(group.headingKey)}
               </p>
             )}
             {group.items.map((item) => (
@@ -142,7 +157,7 @@ export default function AdminShell() {
             <path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3" />
             <path d="M15 16l4-4-4-4" /><path d="M19 12H9" />
           </svg>
-          Log out
+          {t('nav.logout')}
         </button>
       </aside>
 
@@ -157,9 +172,22 @@ export default function AdminShell() {
                 <circle cx="11" cy="11" r="6.5" /><path d="m20 20-3.5-3.5" />
               </svg>
               <input
-                placeholder="Search applications, pets, owners…"
+                placeholder={t('header.searchPlaceholder')}
                 className="w-[300px] h-10 rounded-[10px] border border-black/[0.14] pl-9 pr-3.5 text-[13px] bg-surface focus:outline-none focus:border-primary"
               />
+            </div>
+            <div className="flex gap-0.5 bg-surface p-[3px] rounded-lg text-[11.5px] font-bold">
+              {LANGS.map(({ code, label }) => (
+                <button
+                  key={code}
+                  onClick={() => changeLang(code)}
+                  className={i18n.resolvedLanguage === code
+                    ? 'px-2 py-[5px] rounded-md bg-white text-primary'
+                    : 'px-2 py-[5px] text-muted'}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
             <button className="w-[38px] h-[38px] rounded-[10px] bg-surface flex items-center justify-center relative">
               <svg width="17" height="17" fill="none" stroke="#4A5551" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

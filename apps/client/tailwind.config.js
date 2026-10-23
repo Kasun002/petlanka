@@ -11,8 +11,8 @@ export default {
         muted: '#9A968A',
       },
       fontFamily: {
-        display: ['Sora', 'sans-serif'],
-        body: ['Work Sans', 'sans-serif'],
+        display: ['Sora', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'sans-serif'],
+        body: ['Work Sans', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'sans-serif'],
       },
     },
   },

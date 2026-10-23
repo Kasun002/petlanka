@@ -1,5 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { NIC_REGEX, NIC_REGEX_MESSAGE, SL_PHONE_REGEX, SL_PHONE_REGEX_MESSAGE } from '@petlanka/types';
 import AddressFields, { type AddressValue } from '../../components/auth/AddressFields';
 import TermsCheckbox from '../../components/auth/TermsCheckbox';
@@ -21,6 +22,7 @@ const INPUT_CLS = 'w-full border-2 border-gray-200 rounded-xl px-3 py-3 text-sm 
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation('auth');
 
   const {
     register,
@@ -44,7 +46,7 @@ export default function RegisterPage() {
       await registerClient({ fullName, nic, ...address });
       navigate('/home', { replace: true });
     } catch {
-      setError('root', { message: 'Registration failed. Please try again.' });
+      setError('root', { message: t('register.failed') });
     }
   });
 
@@ -52,19 +54,19 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-6 py-10">
       <div className="w-full max-w-sm space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Create account</h1>
-          <p className="mt-1 text-sm text-gray-500">Tell us a bit about yourself</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('register.title')}</h1>
+          <p className="mt-1 text-sm text-gray-500">{t('register.subtitle')}</p>
         </div>
 
         <form onSubmit={onSubmit} className="space-y-4" noValidate>
           <FormField error={errors.fullName?.message}>
             <input
               type="text"
-              placeholder="Full Name *"
+              placeholder={t('register.fullName')}
               className={INPUT_CLS}
               {...register('fullName', {
-                required: 'Full name is required',
-                minLength: { value: 2, message: 'Name must be at least 2 characters' },
+                required: t('register.fullNameRequired'),
+                minLength: { value: 2, message: t('register.fullNameMin') },
               })}
             />
           </FormField>
@@ -72,10 +74,10 @@ export default function RegisterPage() {
           <FormField error={errors.nic?.message}>
             <input
               type="text"
-              placeholder="NIC Number *"
+              placeholder={t('register.nicNumber')}
               className={INPUT_CLS}
               {...register('nic', {
-                required: 'NIC number is required',
+                required: t('register.nicRequired'),
                 pattern: { value: NIC_REGEX, message: NIC_REGEX_MESSAGE },
               })}
             />
@@ -86,7 +88,7 @@ export default function RegisterPage() {
               name="phone"
               control={control}
               rules={{
-                required: 'Phone number is required',
+                required: t('register.phoneRequired'),
                 validate: (v) => SL_PHONE_REGEX.test(v) || SL_PHONE_REGEX_MESSAGE,
               }}
               render={({ field }) => (
@@ -98,10 +100,10 @@ export default function RegisterPage() {
           <FormField error={errors.email?.message}>
             <input
               type="email"
-              placeholder="Email (optional)"
+              placeholder={t('register.emailOptional')}
               className={INPUT_CLS}
               {...register('email', {
-                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' },
+                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t('login.emailRequired') },
               })}
             />
           </FormField>
@@ -112,10 +114,10 @@ export default function RegisterPage() {
               control={control}
               rules={{
                 validate: (v) => {
-                  if (!v.province) return 'Province is required';
-                  if (!v.district) return 'District is required';
-                  if (!v.city) return 'City is required';
-                  if (!v.streetAddress) return 'Street address is required';
+                  if (!v.province) return t('register.provinceRequired');
+                  if (!v.district) return t('register.districtRequired');
+                  if (!v.city) return t('register.cityRequired');
+                  if (!v.streetAddress) return t('register.streetRequired');
                   return true;
                 },
               }}
@@ -129,7 +131,7 @@ export default function RegisterPage() {
             <Controller
               name="terms"
               control={control}
-              rules={{ validate: (v) => v || 'Please accept the terms & conditions' }}
+              rules={{ validate: (v) => v || t('register.termsRequired') }}
               render={({ field }) => (
                 <TermsCheckbox checked={field.value} onChange={() => field.onChange(!field.value)} />
               )}
@@ -143,7 +145,7 @@ export default function RegisterPage() {
             disabled={isSubmitting}
             className="w-full bg-primary text-white py-4 rounded-2xl text-base font-semibold hover:bg-primary-dark disabled:opacity-60 transition-colors"
           >
-            {isSubmitting ? 'Creating account…' : 'Continue'}
+            {isSubmitting ? t('register.submitting') : t('register.submit')}
           </button>
         </form>
       </div>

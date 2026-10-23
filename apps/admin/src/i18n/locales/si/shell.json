@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "dashboard": "උපකරණ පුවරුව",
+    "applications": "අයදුම්පත්",
+    "petRegistry": "සතා ලේඛනාගාරය",
+    "owners": "හිමිකරුවන්",
+    "reports": "වාර්තා",
+    "assignRequests": "ඉල්ලීම් පවරන්න",
+    "usersRoles": "පරිශීලකයන් සහ භූමිකා",
+    "settings": "සැකසීම්",
+    "operations": "මෙහෙයුම්",
+    "administration": "පරිපාලනය",
+    "logout": "පිට වන්න"
+  },
+  "header": {
+    "searchPlaceholder": "අයදුම්පත්, සතුන්, හිමිකරුවන් සොයන්න…"
+  }
+}

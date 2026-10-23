@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
+
 interface Props {
   checked: boolean;
   onChange: () => void;
 }
 
 export default function TermsCheckbox({ checked, onChange }: Props) {
+  const { t } = useTranslation('auth');
   return (
     <label className="flex items-start gap-2 cursor-pointer text-sm text-gray-600">
       <input
@@ -13,13 +16,13 @@ export default function TermsCheckbox({ checked, onChange }: Props) {
         className="mt-0.5 accent-primary"
       />
       <span>
-        I agree to the{' '}
+        {t('register.termsAgree')}{' '}
         <a href="/terms" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
-          Terms & Conditions
+          {t('register.termsLink')}
         </a>{' '}
-        and{' '}
+        {t('register.and')}{' '}
         <a href="/privacy" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
-          Privacy Policy
+          {t('register.privacyLink')}
         </a>
       </span>
     </label>

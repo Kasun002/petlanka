@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "applications": "Applications",
+    "petRegistry": "Pet Registry",
+    "owners": "Owners",
+    "reports": "Reports",
+    "assignRequests": "Assign Requests",
+    "usersRoles": "Users & Roles",
+    "settings": "Settings",
+    "operations": "Operations",
+    "administration": "Administration",
+    "logout": "Log out"
+  },
+  "header": {
+    "searchPlaceholder": "Search applications, pets, owners…"
+  }
+}

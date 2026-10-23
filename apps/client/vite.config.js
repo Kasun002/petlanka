@@ -7,6 +7,7 @@ export default defineConfig({
         alias: {
             '@': resolve(__dirname, './src'),
             '@petlanka/types': resolve(__dirname, '../../packages/types/src/index.ts'),
+            '@petlanka/i18n': resolve(__dirname, '../../packages/i18n/src/index.ts'),
         },
     },
     server: {

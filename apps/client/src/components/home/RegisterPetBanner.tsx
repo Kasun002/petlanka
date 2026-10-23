@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   /** Compact button variant for the desktop header row */
@@ -7,6 +8,7 @@ interface Props {
 
 export default function RegisterPetBanner({ compact = false }: Props) {
   const navigate = useNavigate();
+  const { t } = useTranslation('home');
 
   if (compact) {
     return (
@@ -18,7 +20,7 @@ export default function RegisterPetBanner({ compact = false }: Props) {
         <svg width="16" height="16" fill="none" stroke="#241505" strokeWidth="2.2" strokeLinecap="round">
           <path d="M12 5v14M5 12h14" />
         </svg>
-        Register a new pet
+        {t('registerPet')}
       </button>
     );
   }
@@ -35,8 +37,8 @@ export default function RegisterPetBanner({ compact = false }: Props) {
         </svg>
       </div>
       <div className="flex-1">
-        <p className="font-bold text-white text-[15px]">Register a new pet</p>
-        <p className="text-[12.5px] text-white/85 mt-0.5">Get your cat or dog licensed</p>
+        <p className="font-bold text-white text-[15px]">{t('registerPet')}</p>
+        <p className="text-[12.5px] text-white/85 mt-0.5">{t('registerPetSubtitle')}</p>
       </div>
       <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 5l7 7-7 7" />

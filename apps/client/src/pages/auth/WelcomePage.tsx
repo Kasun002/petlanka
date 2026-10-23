@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function WelcomePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation('auth');
 
   return (
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-6">
@@ -10,9 +12,9 @@ export default function WelcomePage() {
           <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto">
             <span className="text-white text-3xl font-bold">P</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">PetLanka</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t('welcome.title')}</h1>
           <p className="text-gray-500 text-base leading-relaxed">
-            Sri Lanka's trusted platform for pet adoption and rehoming
+            {t('welcome.tagline')}
           </p>
         </div>
 
@@ -21,13 +23,13 @@ export default function WelcomePage() {
             onClick={() => navigate('/login')}
             className="w-full bg-primary text-white py-4 rounded-2xl text-base font-semibold hover:bg-primary-dark transition-colors"
           >
-            Login
+            {t('welcome.loginBtn')}
           </button>
           <button
             onClick={() => navigate('/login')}
             className="w-full border-2 border-primary text-primary py-4 rounded-2xl text-base font-semibold hover:bg-primary hover:text-white transition-colors"
           >
-            Sign Up
+            {t('welcome.signupBtn')}
           </button>
         </div>
       </div>

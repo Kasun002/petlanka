@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import type { OtpIdentifierType, OtpVerifyRouteState } from '@petlanka/types';
 import { SL_PHONE_REGEX, SL_PHONE_REGEX_MESSAGE } from '@petlanka/types';
 import PhoneInput from '../../components/auth/PhoneInput';
@@ -16,6 +17,7 @@ const INPUT_CLS = 'w-full border-2 border-gray-200 rounded-xl px-3 py-3 text-sm 
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation('auth');
   const [identifierType, setIdentifierType] = useState<OtpIdentifierType>('phone');
   const [apiError, setApiError] = useState('');
 
@@ -23,8 +25,8 @@ export default function LoginPage() {
     defaultValues: { phone: '', email: '' },
   });
 
-  const handleTypeChange = (t: OtpIdentifierType) => {
-    setIdentifierType(t);
+  const handleTypeChange = (tp: OtpIdentifierType) => {
+    setIdentifierType(tp);
     setApiError('');
     reset({ phone: '', email: '' });
   };
@@ -36,7 +38,7 @@ export default function LoginPage() {
       await requestOtp(identifierType === 'phone' ? { phone: identifier } : { email: identifier });
       navigate('/login/verify', { state: { identifier, type: identifierType } as OtpVerifyRouteState });
     } catch {
-      setApiError('Failed to send code. Please try again.');
+      setApiError(t('login.failed'));
     }
   });
 
@@ -44,21 +46,21 @@ export default function LoginPage() {
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-6">
       <div className="w-full max-w-sm space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Sign in</h1>
-          <p className="mt-1 text-sm text-gray-500">We'll send a one-time code to verify</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('login.title')}</h1>
+          <p className="mt-1 text-sm text-gray-500">{t('login.subtitle')}</p>
         </div>
 
         <div className="flex rounded-xl border-2 border-gray-200 overflow-hidden">
-          {(['phone', 'email'] as OtpIdentifierType[]).map((t) => (
+          {(['phone', 'email'] as OtpIdentifierType[]).map((tp) => (
             <button
-              key={t}
+              key={tp}
               type="button"
-              onClick={() => handleTypeChange(t)}
+              onClick={() => handleTypeChange(tp)}
               className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
-                identifierType === t ? 'bg-primary text-white' : 'text-gray-500 hover:text-gray-700'
+                identifierType === tp ? 'bg-primary text-white' : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              {t === 'phone' ? 'Phone' : 'Email'}
+              {tp === 'phone' ? t('login.phoneTab') : t('login.emailTab')}
             </button>
           ))}
         </div>
@@ -70,7 +72,7 @@ export default function LoginPage() {
                 name="phone"
                 control={control}
                 rules={{
-                  required: 'Phone number is required',
+                  required: t('login.phoneRequired'),
                   validate: (v) => SL_PHONE_REGEX.test(v) || SL_PHONE_REGEX_MESSAGE,
                 }}
                 render={({ field }) => (
@@ -82,11 +84,11 @@ export default function LoginPage() {
             <FormField error={errors.email?.message}>
               <input
                 type="email"
-                placeholder="Email address"
+                placeholder={t('login.emailPlaceholder')}
                 className={INPUT_CLS}
                 {...register('email', {
-                  required: 'Email address is required',
-                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' },
+                  required: t('login.emailRequired'),
+                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t('login.emailRequired') },
                 })}
               />
             </FormField>
@@ -99,7 +101,7 @@ export default function LoginPage() {
             disabled={isSubmitting}
             className="w-full bg-primary text-white py-4 rounded-2xl text-base font-semibold hover:bg-primary-dark disabled:opacity-60 transition-colors"
           >
-            {isSubmitting ? 'Sending…' : 'Send one-time code'}
+            {isSubmitting ? t('login.sending') : t('login.sendCode')}
           </button>
         </form>
       </div>

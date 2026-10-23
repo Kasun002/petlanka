@@ -1,0 +1,18 @@
+{
+  "status": {
+    "ACTIVE": "Active",
+    "EXPIRES": "Expiring",
+    "PENDING": "Pending",
+    "EXPIRED": "Expired",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+    "REVIEW": "Under Review",
+    "INACTIVE": "Inactive"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidPhone": "Enter a valid Sri Lankan phone number",
+    "invalidNic": "Enter a valid NIC number",
+    "invalidEmail": "Enter a valid email address"
+  }
+}
