@@ -1,0 +1,35 @@
+{
+  "title": "Settings",
+  "tabs": {
+    "general": "General",
+    "fees": "Licence Fees",
+    "notifications": "Notifications"
+  },
+  "general": {
+    "title": "General Settings",
+    "orgName": "Organisation Name",
+    "orgNamePlaceholder": "Enter organisation name",
+    "contactEmail": "Contact Email",
+    "contactEmailPlaceholder": "Enter contact email",
+    "timezone": "Timezone",
+    "save": "Save Changes"
+  },
+  "fees": {
+    "title": "Licence Fee Schedule",
+    "species": "Species",
+    "newFee": "New Registration (Rs.)",
+    "renewalFee": "Renewal (Rs.)",
+    "transferFee": "Transfer (Rs.)",
+    "save": "Save Fees"
+  },
+  "notifications": {
+    "title": "Notification Settings",
+    "emailSection": "Email Notifications",
+    "smsSection": "SMS Notifications",
+    "onApproval": "On application approval",
+    "onRejection": "On application rejection",
+    "onExpiry": "Licence expiry reminder (30 days)",
+    "onAssign": "On request assignment",
+    "save": "Save Preferences"
+  }
+}

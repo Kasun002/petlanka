@@ -1,0 +1,31 @@
+{
+  "title": "සත්ත්ව ලේඛනය",
+  "filters": {
+    "allSpecies": "සියලු විශේෂ",
+    "allStatuses": "සියලු තත්ව",
+    "allDistricts": "සියලු දිස්ත්‍රික්",
+    "searchPlaceholder": "සත්ත්වයා, හිමිකරු, මයික්‍රොචිප් සොයන්න…"
+  },
+  "table": {
+    "id": "Pet ID",
+    "name": "නම",
+    "species": "විශේෂය",
+    "breed": "ප්‍රභේදය",
+    "owner": "හිමිකරු",
+    "district": "දිස්ත්‍රික්කය",
+    "registered": "ලියාපදිංචි",
+    "expiry": "බලපත්‍ර කාලය",
+    "status": "තත්ත්වය"
+  },
+  "detail": {
+    "title": "සත්ත්ව විස්තර",
+    "basicInfo": "මූලික තොරතුරු",
+    "licenceInfo": "බලපත්‍ර තොරතුරු",
+    "ownerInfo": "හිමිකරු තොරතුරු",
+    "dob": "උපන් දිනය",
+    "microchip": "මයික්‍රොචිප් අංකය",
+    "registered": "ලියාපදිංචි",
+    "expiry": "බලපත්‍ර කාලය",
+    "viewOwner": "හිමිකරු බලන්න"
+  }
+}

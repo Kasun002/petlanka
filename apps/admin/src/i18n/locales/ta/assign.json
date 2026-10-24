@@ -1,0 +1,31 @@
+{
+  "title": "கோரிக்கைகளை ஒதுக்கவும்",
+  "filters": {
+    "allStatuses": "அனைத்து நிலைகள்",
+    "allPriorities": "அனைத்து முன்னுரிமைகள்",
+    "searchPlaceholder": "விண்ணப்பதாரர், ID தேடவும்…"
+  },
+  "table": {
+    "id": "கோரிக்கை ID",
+    "applicant": "விண்ணப்பதாரர்",
+    "type": "வகை",
+    "district": "மாவட்டம்",
+    "submitted": "சமர்ப்பித்தது",
+    "priority": "முன்னுரிமை",
+    "assignedTo": "ஒதுக்கப்பட்டது",
+    "status": "நிலை"
+  },
+  "priority": { "HIGH": "அதிகம்", "NORMAL": "சாதாரண" },
+  "status": { "PENDING": "நிலுவை", "ASSIGNED": "ஒதுக்கப்பட்டது", "COMPLETE": "முடிந்தது" },
+  "unassigned": "ஒதுக்கப்படவில்லை",
+  "assign": "ஒதுக்கவும்",
+  "reassign": "மீண்டும் ஒதுக்கவும்",
+  "modal": {
+    "title": "அதிகாரிக்கு ஒதுக்கவும்",
+    "selectOfficer": "அதிகாரியை தேர்ந்தெடுக்கவும்",
+    "selectPlaceholder": "ஒரு அதிகாரியை தேர்வு செய்யவும்…",
+    "activeCount": "செயலில்",
+    "confirm": "ஒதுக்கீட்டை உறுதிப்படுத்தவும்",
+    "cancel": "ரத்து செய்யவும்"
+  }
+}

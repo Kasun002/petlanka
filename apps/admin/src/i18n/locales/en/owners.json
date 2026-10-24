@@ -1,0 +1,17 @@
+{
+  "title": "Owners",
+  "filters": {
+    "allDistricts": "All Districts",
+    "allStatuses": "All Statuses",
+    "searchPlaceholder": "Search name, NIC, email…"
+  },
+  "table": {
+    "id": "Owner ID",
+    "name": "Name",
+    "nic": "NIC",
+    "phone": "Phone",
+    "district": "District",
+    "petCount": "Pets",
+    "status": "Status"
+  }
+}

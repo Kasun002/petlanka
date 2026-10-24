@@ -1,0 +1,26 @@
+{
+  "summary": [
+    { "id": "total_apps",  "value": "284",      "label": "Total Applications", "iconColor": "#0F7A63", "iconBg": "#E3F2ED" },
+    { "id": "approved",    "value": "231",       "label": "Approved",           "iconColor": "#1E8A5F", "iconBg": "#E5F5EC" },
+    { "id": "avg_process", "value": "2.4 days",  "label": "Avg. Process Time",  "iconColor": "#2461C7", "iconBg": "#EAF2FB" },
+    { "id": "revenue_ytd", "value": "Rs. 9.2M",  "label": "Revenue YTD",        "iconColor": "#B4740C", "iconBg": "#FCF0DA" }
+  ],
+  "monthly": [
+    { "month": "Apr", "applications": 18, "approved": 15 },
+    { "month": "May", "applications": 24, "approved": 21 },
+    { "month": "Jun", "applications": 31, "approved": 26 },
+    { "month": "Jul", "applications": 28, "approved": 25 },
+    { "month": "Aug", "applications": 35, "approved": 30 },
+    { "month": "Sep", "applications": 42, "approved": 38 }
+  ],
+  "byDistrict": [
+    { "district": "Colombo",   "count": 74 },
+    { "district": "Gampaha",   "count": 52 },
+    { "district": "Kandy",     "count": 38 },
+    { "district": "Kalutara",  "count": 31 },
+    { "district": "Galle",     "count": 28 },
+    { "district": "Matara",    "count": 22 },
+    { "district": "Kurunegala","count": 19 },
+    { "district": "Other",     "count": 20 }
+  ]
+}

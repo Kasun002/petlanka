@@ -1,0 +1,21 @@
+{
+  "requests": [
+    { "id": "REQ-001", "applicationId": "APP-001", "applicant": "M. Fernando",    "type": "New",      "district": "Colombo",   "submitted": "2026-09-18", "priority": "HIGH",   "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-002", "applicationId": "APP-002", "applicant": "S. Jayawardena", "type": "Renewal",  "district": "Gampaha",   "submitted": "2026-09-17", "priority": "NORMAL", "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-003", "applicationId": "APP-006", "applicant": "N. Wickrama",    "type": "Renewal",  "district": "Matara",    "submitted": "2026-09-13", "priority": "HIGH",   "assignedTo": "OFF-003", "status": "ASSIGNED" },
+    { "id": "REQ-004", "applicationId": "APP-007", "applicant": "D. Rathnayake",  "type": "New",      "district": "Galle",     "submitted": "2026-09-12", "priority": "NORMAL", "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-005", "applicationId": "APP-009", "applicant": "P. Gunawardena", "type": "New",      "district": "Gampaha",   "submitted": "2026-09-10", "priority": "NORMAL", "assignedTo": "OFF-002", "status": "ASSIGNED" },
+    { "id": "REQ-006", "applicationId": "APP-011", "applicant": "C. Weerasinghe", "type": "New",      "district": "Colombo",   "submitted": "2026-09-08", "priority": "HIGH",   "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-007", "applicationId": "APP-012", "applicant": "H. Mendis",      "type": "Transfer", "district": "Matara",    "submitted": "2026-09-07", "priority": "NORMAL", "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-008", "applicationId": "APP-014", "applicant": "B. Amarasinghe", "type": "New",      "district": "Kurunegala","submitted": "2026-09-05", "priority": "NORMAL", "assignedTo": "OFF-004", "status": "COMPLETE" },
+    { "id": "REQ-009", "applicationId": "APP-017", "applicant": "M. Pathirana",   "type": "New",      "district": "Gampaha",   "submitted": "2026-09-02", "priority": "NORMAL", "assignedTo": null,      "status": "PENDING"  },
+    { "id": "REQ-010", "applicationId": "APP-020", "applicant": "O. Koswatta",    "type": "New",      "district": "Galle",     "submitted": "2026-08-30", "priority": "HIGH",   "assignedTo": null,      "status": "PENDING"  }
+  ],
+  "officers": [
+    { "id": "OFF-001", "name": "K. Jayasena",    "district": "Colombo",   "activeCount": 3 },
+    { "id": "OFF-002", "name": "S. Perera",      "district": "Gampaha",   "activeCount": 5 },
+    { "id": "OFF-003", "name": "A. Ranasinghe",  "district": "Matara",    "activeCount": 2 },
+    { "id": "OFF-004", "name": "R. Wijesinghe",  "district": "Kurunegala","activeCount": 1 },
+    { "id": "OFF-005", "name": "P. Nanayakkara", "district": "Galle",     "activeCount": 4 }
+  ]
+}

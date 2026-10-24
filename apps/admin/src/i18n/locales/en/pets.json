@@ -1,0 +1,31 @@
+{
+  "title": "Pet Registry",
+  "filters": {
+    "allSpecies": "All Species",
+    "allStatuses": "All Statuses",
+    "allDistricts": "All Districts",
+    "searchPlaceholder": "Search pet, owner, microchip…"
+  },
+  "table": {
+    "id": "Pet ID",
+    "name": "Name",
+    "species": "Species",
+    "breed": "Breed",
+    "owner": "Owner",
+    "district": "District",
+    "registered": "Registered",
+    "expiry": "Licence Expiry",
+    "status": "Status"
+  },
+  "detail": {
+    "title": "Pet Details",
+    "basicInfo": "Basic Info",
+    "licenceInfo": "Licence Info",
+    "ownerInfo": "Owner Info",
+    "dob": "Date of Birth",
+    "microchip": "Microchip No.",
+    "registered": "Registered",
+    "expiry": "Licence Expiry",
+    "viewOwner": "View Owner"
+  }
+}

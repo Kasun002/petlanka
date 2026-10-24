@@ -1,0 +1,38 @@
+{
+  "title": "Assign Requests",
+  "filters": {
+    "allStatuses": "All Statuses",
+    "allPriorities": "All Priorities",
+    "searchPlaceholder": "Search applicant, ID…"
+  },
+  "table": {
+    "id": "Req ID",
+    "applicant": "Applicant",
+    "type": "Type",
+    "district": "District",
+    "submitted": "Submitted",
+    "priority": "Priority",
+    "assignedTo": "Assigned To",
+    "status": "Status"
+  },
+  "priority": {
+    "HIGH": "High",
+    "NORMAL": "Normal"
+  },
+  "status": {
+    "PENDING": "Pending",
+    "ASSIGNED": "Assigned",
+    "COMPLETE": "Complete"
+  },
+  "unassigned": "Unassigned",
+  "assign": "Assign",
+  "reassign": "Reassign",
+  "modal": {
+    "title": "Assign to Officer",
+    "selectOfficer": "Select Officer",
+    "selectPlaceholder": "Choose an officer…",
+    "activeCount": "active",
+    "confirm": "Confirm Assignment",
+    "cancel": "Cancel"
+  }
+}

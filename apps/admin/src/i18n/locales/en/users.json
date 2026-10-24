@@ -1,0 +1,42 @@
+{
+  "title": "Users & Roles",
+  "addUser": "Add User",
+  "filters": {
+    "allRoles": "All Roles",
+    "allStatuses": "All Statuses",
+    "searchPlaceholder": "Search name, email…"
+  },
+  "table": {
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "district": "District",
+    "lastLogin": "Last Login",
+    "status": "Status",
+    "actions": ""
+  },
+  "roles": {
+    "SUPER_ADMIN": "Super Admin",
+    "ADMIN": "Admin",
+    "OFFICER": "Officer"
+  },
+  "actions": {
+    "edit": "Edit",
+    "deactivate": "Deactivate",
+    "activate": "Activate"
+  },
+  "form": {
+    "addTitle": "Add User",
+    "editTitle": "Edit User",
+    "name": "Full Name",
+    "namePlaceholder": "Enter full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter email address",
+    "role": "Role",
+    "rolePlaceholder": "Select role",
+    "district": "District",
+    "districtPlaceholder": "Select district",
+    "save": "Save User",
+    "cancel": "Cancel"
+  }
+}

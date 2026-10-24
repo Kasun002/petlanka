@@ -1,0 +1,19 @@
+{
+  "list": [
+    { "id": "OWN-001", "name": "M. Fernando",     "nic": "198812345670", "phone": "+94771234567", "email": "mfernando@example.com",  "district": "Colombo",   "petCount": 2, "status": "ACTIVE"   },
+    { "id": "OWN-002", "name": "S. Jayawardena",  "nic": "199012345671", "phone": "+94772345678", "email": "sjaya@example.com",       "district": "Gampaha",   "petCount": 2, "status": "ACTIVE"   },
+    { "id": "OWN-003", "name": "R. Bandara",      "nic": "198512345672", "phone": "+94773456789", "email": "rbandara@example.com",    "district": "Kandy",     "petCount": 2, "status": "ACTIVE"   },
+    { "id": "OWN-004", "name": "A. Silva",        "nic": "199512345673", "phone": "+94774567890", "email": "asilva@example.com",      "district": "Kalutara",  "petCount": 2, "status": "ACTIVE"   },
+    { "id": "OWN-005", "name": "K. Perera",       "nic": "199212345674", "phone": "+94775678901", "email": "kperera@example.com",     "district": "Colombo",   "petCount": 2, "status": "ACTIVE"   },
+    { "id": "OWN-006", "name": "N. Wickrama",     "nic": "198712345675", "phone": "+94776789012", "email": "nwickrama@example.com",   "district": "Matara",    "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-007", "name": "D. Rathnayake",   "nic": "199312345676", "phone": "+94777890123", "email": "drath@example.com",       "district": "Galle",     "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-008", "name": "T. Dissanayake",  "nic": "199712345677", "phone": "+94778901234", "email": "tdissa@example.com",      "district": "Colombo",   "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-009", "name": "P. Gunawardena",  "nic": "198912345678", "phone": "+94779012345", "email": "pguna@example.com",       "district": "Gampaha",   "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-010", "name": "L. Seneviratne",  "nic": "199612345679", "phone": "+94770123456", "email": "lsene@example.com",       "district": "Kandy",     "petCount": 1, "status": "INACTIVE" },
+    { "id": "OWN-011", "name": "C. Weerasinghe",  "nic": "199012345680", "phone": "+94771122334", "email": "cweera@example.com",      "district": "Colombo",   "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-012", "name": "H. Mendis",       "nic": "198612345681", "phone": "+94772233445", "email": "hmendis@example.com",     "district": "Matara",    "petCount": 1, "status": "INACTIVE" },
+    { "id": "OWN-013", "name": "V. Liyanage",     "nic": "199412345682", "phone": "+94773344556", "email": "vliyan@example.com",      "district": "Galle",     "petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-014", "name": "B. Amarasinghe",  "nic": "199812345683", "phone": "+94774455667", "email": "bamar@example.com",       "district": "Kurunegala","petCount": 1, "status": "ACTIVE"   },
+    { "id": "OWN-015", "name": "F. Herath",       "nic": "199112345684", "phone": "+94775566778", "email": "fherath@example.com",     "district": "Colombo",   "petCount": 1, "status": "ACTIVE"   }
+  ]
+}
