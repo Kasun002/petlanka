@@ -36,7 +36,7 @@ import taAssign from './locales/ta/assign.json';
 import taUsers from './locales/ta/users.json';
 import taSettings from './locales/ta/settings.json';
 
-i18n
+await i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
