@@ -26,7 +26,7 @@ export default function WelcomePage() {
             {t('welcome.loginBtn')}
           </button>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/register')}
             className="w-full border-2 border-primary text-primary py-4 rounded-2xl text-base font-semibold hover:bg-primary hover:text-white transition-colors"
           >
             {t('welcome.signupBtn')}

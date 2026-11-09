@@ -1,4 +1,5 @@
 import { provinces, districts, cities } from '@petlanka/types';
+import SelectInput from '../ui/SelectInput';
 
 export interface AddressValue {
   province: string;
@@ -29,24 +30,22 @@ export default function AddressFields({ value, onChange }: Readonly<Props>) {
     onChange(updated);
   };
 
-  const selectCls = 'w-full border-2 border-gray-200 rounded-xl px-3 py-3 text-sm focus:border-primary focus:outline-none';
-
   return (
     <div className="space-y-3">
-      <select value={value.province} onChange={set('province')} className={selectCls}>
+      <SelectInput value={value.province} onChange={set('province')}>
         <option value="">Select Province *</option>
         {provinces.map((p) => <option key={p.id} value={p.name_en}>{p.name_en}</option>)}
-      </select>
+      </SelectInput>
 
-      <select value={value.district} onChange={set('district')} disabled={!value.province} className={selectCls}>
+      <SelectInput value={value.district} onChange={set('district')} disabled={!value.province}>
         <option value="">Select District *</option>
         {filteredDistricts.map((d) => <option key={d.id} value={d.name_en}>{d.name_en}</option>)}
-      </select>
+      </SelectInput>
 
-      <select value={value.city} onChange={set('city')} disabled={!value.district} className={selectCls}>
+      <SelectInput value={value.city} onChange={set('city')} disabled={!value.district}>
         <option value="">Select City *</option>
         {filteredCities.map((c) => <option key={c.id} value={c.name_en}>{c.name_en}</option>)}
-      </select>
+      </SelectInput>
 
       <input
         type="text"
