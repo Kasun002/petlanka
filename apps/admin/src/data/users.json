@@ -1,0 +1,12 @@
+{
+  "list": [
+    { "id": "USR-001", "name": "Nimal Jayawardena",  "email": "nimal@petlanka.gov.lk",     "role": "SUPER_ADMIN", "district": "—",         "lastLogin": "2026-09-20T09:12:00Z", "status": "ACTIVE"   },
+    { "id": "USR-002", "name": "Seetha Fernando",    "email": "seetha@petlanka.gov.lk",    "role": "ADMIN",       "district": "Colombo",   "lastLogin": "2026-09-20T08:45:00Z", "status": "ACTIVE"   },
+    { "id": "USR-003", "name": "Kumara Bandara",     "email": "kumara@petlanka.gov.lk",    "role": "ADMIN",       "district": "Kandy",     "lastLogin": "2026-09-19T14:30:00Z", "status": "ACTIVE"   },
+    { "id": "USR-004", "name": "Kamani Jayasena",    "email": "kamani@petlanka.gov.lk",    "role": "OFFICER",     "district": "Colombo",   "lastLogin": "2026-09-20T10:01:00Z", "status": "ACTIVE"   },
+    { "id": "USR-005", "name": "Suresh Perera",      "email": "suresh@petlanka.gov.lk",    "role": "OFFICER",     "district": "Gampaha",   "lastLogin": "2026-09-18T16:22:00Z", "status": "ACTIVE"   },
+    { "id": "USR-006", "name": "Amali Ranasinghe",   "email": "amali@petlanka.gov.lk",     "role": "OFFICER",     "district": "Matara",    "lastLogin": "2026-09-17T11:09:00Z", "status": "ACTIVE"   },
+    { "id": "USR-007", "name": "Roshan Wijesinghe",  "email": "roshan@petlanka.gov.lk",    "role": "OFFICER",     "district": "Kurunegala","lastLogin": "2026-09-15T09:55:00Z", "status": "INACTIVE" },
+    { "id": "USR-008", "name": "Priya Nanayakkara",  "email": "priya@petlanka.gov.lk",     "role": "OFFICER",     "district": "Galle",     "lastLogin": "2026-09-20T07:30:00Z", "status": "ACTIVE"   }
+  ]
+}

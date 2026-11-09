@@ -1,0 +1,43 @@
+{
+  "title": "Applications",
+  "filters": {
+    "allStatuses": "All Statuses",
+    "allTypes": "All Types",
+    "allDistricts": "All Districts",
+    "searchPlaceholder": "Search applicant, pet, ID…"
+  },
+  "table": {
+    "id": "App ID",
+    "applicant": "Applicant",
+    "pet": "Pet",
+    "type": "Type",
+    "district": "District",
+    "submitted": "Submitted",
+    "status": "Status"
+  },
+  "detail": {
+    "applicantInfo": "Applicant Info",
+    "petInfo": "Pet Info",
+    "nic": "NIC",
+    "phone": "Phone",
+    "email": "Email",
+    "species": "Species",
+    "breed": "Breed",
+    "dob": "Date of Birth",
+    "microchip": "Microchip No."
+  },
+  "review": {
+    "title": "Review Application",
+    "notes": "Notes",
+    "notesPlaceholder": "Add review notes…",
+    "approve": "Approve",
+    "reject": "Reject",
+    "requestInfo": "Request Info",
+    "back": "Back to Applications",
+    "currentStatus": "Current Status",
+    "appId": "Application ID",
+    "type": "Type",
+    "district": "District",
+    "submitted": "Submitted"
+  }
+}

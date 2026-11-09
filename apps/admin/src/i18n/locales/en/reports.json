@@ -1,0 +1,14 @@
+{
+  "title": "Reports",
+  "summary": "Summary",
+  "monthly": {
+    "title": "Applications by Month",
+    "applications": "Applications",
+    "approved": "Approved"
+  },
+  "byDistrict": {
+    "title": "By District",
+    "district": "District",
+    "count": "Applications"
+  }
+}

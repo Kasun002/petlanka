@@ -1,0 +1,58 @@
+{
+  "list": [
+    {
+      "id": "N1",
+      "type": "application",
+      "title": "New application submitted",
+      "body": "M. Fernando submitted APP-001 (New — Colombo)",
+      "route": "/applications/APP-001",
+      "read": false,
+      "time": "5m ago"
+    },
+    {
+      "id": "N2",
+      "type": "assign",
+      "title": "Request needs assignment",
+      "body": "REQ-006 from C. Weerasinghe is unassigned",
+      "route": "/assign",
+      "read": false,
+      "time": "12m ago"
+    },
+    {
+      "id": "N3",
+      "type": "expiry",
+      "title": "Licence expiring soon",
+      "body": "Max (PET-010) — expires 15 Jan 2026",
+      "route": "/pets/PET-010",
+      "read": false,
+      "time": "1h ago"
+    },
+    {
+      "id": "N4",
+      "type": "application",
+      "title": "Application approved",
+      "body": "APP-003 Tiger (R. Bandara) approved",
+      "route": "/applications/APP-003",
+      "read": true,
+      "time": "2h ago"
+    },
+    {
+      "id": "N5",
+      "type": "application",
+      "title": "Application rejected",
+      "body": "APP-004 Bella (A. Silva) — incomplete transfer docs",
+      "route": "/applications/APP-004",
+      "read": true,
+      "time": "3h ago"
+    },
+    {
+      "id": "N6",
+      "type": "assign",
+      "title": "Assignment completed",
+      "body": "REQ-008 assigned to R. Wijesinghe (Kurunegala)",
+      "route": "/assign",
+      "read": true,
+      "time": "5h ago"
+    }
+  ]
+}

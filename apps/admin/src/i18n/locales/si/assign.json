@@ -1,0 +1,31 @@
+{
+  "title": "ඉල්ලීම් පවරන්න",
+  "filters": {
+    "allStatuses": "සියලු තත්ව",
+    "allPriorities": "සියලු ප්‍රමුඛතා",
+    "searchPlaceholder": "අයදුම්කරු, ID සොයන්න…"
+  },
+  "table": {
+    "id": "ඉල්ලීම් ID",
+    "applicant": "අයදුම්කරු",
+    "type": "වර්ගය",
+    "district": "දිස්ත්‍රික්කය",
+    "submitted": "ඉදිරිපත් කළ",
+    "priority": "ප්‍රමුඛතාව",
+    "assignedTo": "පවරා ඇත",
+    "status": "තත්ත්වය"
+  },
+  "priority": { "HIGH": "ඉහළ", "NORMAL": "සාමාන්‍ය" },
+  "status": { "PENDING": "බලාගෙන", "ASSIGNED": "පවරා", "COMPLETE": "සම්පූර්ණ" },
+  "unassigned": "නොදෙනු ලැබ",
+  "assign": "පවරන්න",
+  "reassign": "නැවත පවරන්න",
+  "modal": {
+    "title": "නිලධාරියාට පවරන්න",
+    "selectOfficer": "නිලධාරියා තෝරන්න",
+    "selectPlaceholder": "නිලධාරියෙකු තෝරන්න…",
+    "activeCount": "සක්‍රීය",
+    "confirm": "පැවරීම තහවුරු කරන්න",
+    "cancel": "අවලංගු කරන්න"
+  }
+}
