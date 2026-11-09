@@ -9,25 +9,25 @@ const ICON_STYLES: Record<NotificationType, { bg: string; stroke: string }> = {
 
 function NotificationIcon({ type }: { type: NotificationType }) {
   if (type === 'action') return (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
       <path d="M12 3.5a8.5 8.5 0 1 0 5.2 15.2L21 20l-1.3-3.8A8.5 8.5 0 0 0 12 3.5Z" />
       <path d="M12 8v5M12 15.5h.01" />
     </svg>
   );
   if (type === 'reminder') return (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
       <path d="M4 10a8 8 0 0 1 14-4.5M20 14a8 8 0 0 1-14 4.5" />
       <path d="M18 3v4h-4M6 21v-4h4" />
     </svg>
   );
   if (type === 'success') return (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="block">
       <circle cx="12" cy="12" r="9" />
       <path d="M8 12.5l2.5 2.5L16 9.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
   return (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
       <circle cx="12" cy="12" r="9" />
       <path d="M12 8v4M12 16h.01" />
     </svg>

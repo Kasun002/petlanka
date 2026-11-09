@@ -73,11 +73,11 @@ export default function AppShell() {
             <h1 className="text-[20px] font-bold text-white font-display">{name}</h1>
           </div>
           <button className="w-10 h-10 rounded-xl bg-white/[0.14] flex items-center justify-center relative">
-            <svg width="19" height="19" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13 6 9Z" />
-              <path d="M10 18a2 2 0 0 0 4 0" />
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
+              <path d="M6 10a6 6 0 1 1 12 0c0 5 2 7 2 7H4s2-2 2-7" />
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
             </svg>
-            <span className="absolute top-[7px] right-[8px] w-[7px] h-[7px] rounded-full bg-orange border-[1.5px] border-primary" />
+            <span className="absolute -top-[3px] -right-[3px] w-[8px] h-[8px] rounded-full bg-orange border-2 border-primary" />
           </button>
         </div>
       </header>
@@ -110,13 +110,15 @@ export default function AppShell() {
         </div>
         <div className="flex items-center gap-3.5">
           <LanguageSwitcher />
-          <button className="w-[38px] h-[38px] rounded-[10px] bg-surface flex items-center justify-center relative">
-            <svg width="17" height="17" fill="none" stroke="#4A5551" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13 6 9Z" />
-              <path d="M10 18a2 2 0 0 0 4 0" />
-            </svg>
-            <span className="absolute top-[6px] right-[7px] w-[6px] h-[6px] rounded-full bg-orange" />
-          </button>
+          <div className="relative">
+            <button className="w-[38px] h-[38px] rounded-[10px] bg-white border border-black/[0.1] flex items-center justify-center shadow-sm hover:bg-surface transition-colors">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0F7A63" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
+                <path d="M6 10a6 6 0 1 1 12 0c0 5 2 7 2 7H4s2-2 2-7" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+              </svg>
+            </button>
+            <span className="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] rounded-full bg-orange pointer-events-none" />
+          </div>
           <div className="w-[38px] h-[38px] rounded-[10px] bg-primary flex items-center justify-center text-white font-bold text-[13px]">
             KP
           </div>
