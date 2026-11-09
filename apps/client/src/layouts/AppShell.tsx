@@ -1,58 +1,42 @@
+import { useRef, useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
-
-const LANGS = [
-  { code: 'en', label: 'EN' },
-  { code: 'si', label: 'සි' },
-  { code: 'ta', label: 'த' },
-];
-
-function LanguageSwitcher() {
-  const { i18n } = useTranslation();
-  const change = (code: string) => {
-    i18n.changeLanguage(code);
-    document.documentElement.lang = code;
-  };
-  return (
-    <div className="flex gap-0.5 bg-surface p-[3px] rounded-lg text-[11.5px] font-bold">
-      {LANGS.map(({ code, label }) => (
-        <button
-          key={code}
-          onClick={() => change(code)}
-          className={i18n.resolvedLanguage === code
-            ? 'px-2 py-[5px] rounded-md bg-white text-primary'
-            : 'px-2 py-[5px] text-muted'}
-        >
-          {label}
-        </button>
-      ))}
-    </div>
-  );
-}
+import LanguageSwitcher from '../components/ui/LanguageSwitcher';
+import NotificationPanel from '../components/notifications/NotificationPanel';
+import notificationsData from '../data/notifications.json';
+import type { ClientNotification } from '../types/notification';
 
 export default function AppShell() {
-  useAuth(); // ensure user is available (AuthRoute handles redirect if not)
+  useAuth();
   const { t } = useTranslation('shell');
   // ponytail: replace with user.fullName from /me when endpoint exists
   const name = 'there';
 
+  const [notifs, setNotifs] = useState<ClientNotification[]>(notificationsData as ClientNotification[]);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const bellRef = useRef<HTMLButtonElement>(null);
+
+  const unreadCount = notifs.filter((n) => !n.read).length;
+  const markRead = (id: string) => setNotifs((prev) => prev.map((n) => n.id === id ? { ...n, read: true } : n));
+  const markAllRead = () => setNotifs((prev) => prev.map((n) => ({ ...n, read: true })));
+
   const TABS = [
     {
       to: '/home', label: t('nav.home'),
-      icon: <svg width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11.5 12 4l9 7.5" /><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" /></svg>,
+      icon: <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block"><path d="M3 11.5 12 4l9 7.5" /><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" /></svg>,
     },
     {
       to: '/pets', label: t('nav.myPets'),
-      icon: <svg width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="7" cy="8.5" r="1.6" /><circle cx="12" cy="6" r="1.6" /><circle cx="17" cy="8.5" r="1.6" /><path d="M8.5 13.2c-2 .6-3.2 2.2-3 4 .2 1.8 1.8 2.8 3.5 2.2.9-.3 1.7-.3 2.6 0l.4.1c.9.3 1.7.3 2.6 0 1.7-.6 3.3-1.6 3.5-3.4.2-1.8-1-3.4-3-4-2.1-.6-4.5-.6-6.6 0Z" /></svg>,
+      icon: <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="block"><circle cx="7" cy="8.5" r="1.6" /><circle cx="12" cy="6" r="1.6" /><circle cx="17" cy="8.5" r="1.6" /><path d="M8.5 13.2c-2 .6-3.2 2.2-3 4 .2 1.8 1.8 2.8 3.5 2.2.9-.3 1.7-.3 2.6 0l.4.1c.9.3 1.7.3 2.6 0 1.7-.6 3.3-1.6 3.5-3.4.2-1.8-1-3.4-3-4-2.1-.6-4.5-.6-6.6 0Z" /></svg>,
     },
     {
       to: '/apply', label: t('nav.apply'),
-      icon: <svg width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>,
+      icon: <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="block"><path d="M12 5v14M5 12h14" /></svg>,
     },
     {
       to: '/profile', label: t('nav.profile'),
-      icon: <svg width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M4.5 20c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5" /></svg>,
+      icon: <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block"><circle cx="12" cy="8" r="3.5" /><path d="M4.5 20c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5" /></svg>,
     },
   ];
 
@@ -63,6 +47,35 @@ export default function AppShell() {
     { to: '/profile', label: t('nav.profile') },
   ];
 
+  const bellButton = (stroke: string, border: string) => (
+    <div className="relative">
+      <button
+        ref={bellRef}
+        onClick={() => setNotifOpen((o) => !o)}
+        className={`w-10 h-10 md:w-[38px] md:h-[38px] rounded-xl md:rounded-[10px] flex items-center justify-center relative transition-colors ${border} ${notifOpen ? 'opacity-80' : ''}`}
+      >
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
+          <path d="M6 10a6 6 0 1 1 12 0c0 5 2 7 2 7H4s2-2 2-7" />
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+        </svg>
+      </button>
+      {unreadCount > 0 && (
+        <span className="absolute -top-[4px] -right-[4px] min-w-[16px] h-[16px] px-[3px] rounded-full bg-orange text-white text-[9px] font-bold flex items-center justify-center leading-none pointer-events-none">
+          {unreadCount}
+        </span>
+      )}
+      {notifOpen && (
+        <NotificationPanel
+          notifications={notifs}
+          onRead={markRead}
+          onReadAll={markAllRead}
+          onClose={() => setNotifOpen(false)}
+          anchorRef={bellRef}
+        />
+      )}
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-surface flex flex-col font-body">
       {/* Mobile top header */}
@@ -72,13 +85,7 @@ export default function AppShell() {
             <p className="text-[12.5px] text-white/75 mb-0.5">{t('header.greeting')}</p>
             <h1 className="text-[20px] font-bold text-white font-display">{name}</h1>
           </div>
-          <button className="w-10 h-10 rounded-xl bg-white/[0.14] flex items-center justify-center relative">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
-              <path d="M6 10a6 6 0 1 1 12 0c0 5 2 7 2 7H4s2-2 2-7" />
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-            </svg>
-            <span className="absolute -top-[3px] -right-[3px] w-[8px] h-[8px] rounded-full bg-orange border-2 border-primary" />
-          </button>
+          {bellButton('#fff', 'bg-white/[0.14]')}
         </div>
       </header>
 
@@ -87,7 +94,7 @@ export default function AppShell() {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-2.5">
             <div className="w-[34px] h-[34px] rounded-[9px] bg-primary flex items-center justify-center">
-              <svg width="17" height="17" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="block">
                 <circle cx="7" cy="8.5" r="1.6" /><circle cx="12" cy="6" r="1.6" /><circle cx="17" cy="8.5" r="1.6" />
                 <path d="M8.5 13.2c-2 .6-3.2 2.2-3 4 .2 1.8 1.8 2.8 3.5 2.2.9-.3 1.7-.3 2.6 0l.4.1c.9.3 1.7.3 2.6 0 1.7-.6 3.3-1.6 3.5-3.4.2-1.8-1-3.4-3-4-2.1-.6-4.5-.6-6.6 0Z" />
               </svg>
@@ -110,15 +117,7 @@ export default function AppShell() {
         </div>
         <div className="flex items-center gap-3.5">
           <LanguageSwitcher />
-          <div className="relative">
-            <button className="w-[38px] h-[38px] rounded-[10px] bg-white border border-black/[0.1] flex items-center justify-center shadow-sm hover:bg-surface transition-colors">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0F7A63" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="block">
-                <path d="M6 10a6 6 0 1 1 12 0c0 5 2 7 2 7H4s2-2 2-7" />
-                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-              </svg>
-            </button>
-            <span className="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] rounded-full bg-orange pointer-events-none" />
-          </div>
+          {bellButton('#0F7A63', 'bg-white border border-black/[0.1] shadow-sm hover:bg-surface')}
           <div className="w-[38px] h-[38px] rounded-[10px] bg-primary flex items-center justify-center text-white font-bold text-[13px]">
             KP
           </div>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "cn1",
+    "type": "action",
+    "title": "Officer needs more info on Milo's application",
+    "body": "2 documents & 2 questions — tap to respond",
+    "route": "/applications/app1",
+    "read": false,
+    "time": "2 hours ago"
+  },
+  {
+    "id": "cn2",
+    "type": "reminder",
+    "title": "Rocky's licence expires in 21 days",
+    "body": "Renew now to avoid a late fee",
+    "route": "/pets/2",
+    "read": false,
+    "time": "Yesterday"
+  },
+  {
+    "id": "cn3",
+    "type": "success",
+    "title": "Simba's licence was approved",
+    "body": "Your licence has been issued successfully",
+    "route": "/pets/1",
+    "read": false,
+    "time": "2 days ago"
+  },
+  {
+    "id": "cn4",
+    "type": "info",
+    "title": "Application for Milo received",
+    "body": "We will review it and get back to you",
+    "route": "/applications/app2",
+    "read": true,
+    "time": "3 weeks ago"
+  },
+  {
+    "id": "cn5",
+    "type": "info",
+    "title": "Welcome to PetLanka",
+    "body": "Register your pets and manage their licences here",
+    "route": "/home",
+    "read": true,
+    "time": "1 month ago"
+  }
+]

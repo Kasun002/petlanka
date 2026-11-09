@@ -7,5 +7,10 @@
   },
   "header": {
     "greeting": "Good morning"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "empty": "No notifications"
   }
 }

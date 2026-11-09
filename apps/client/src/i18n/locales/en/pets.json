@@ -1,0 +1,24 @@
+{
+  "title": "My Pets",
+  "noPets": "No pets registered yet",
+  "noPetsSubtitle": "Register your first pet to get started",
+  "registerFirst": "Register a Pet",
+  "viewDetail": "View details",
+  "licenceInfo": "Licence Info",
+  "licenceNumber": "Licence No.",
+  "issued": "Issued",
+  "expires": "Expires",
+  "renew": "Renew Licence",
+  "applyNew": "New Registration",
+  "applicationHistory": "Application History",
+  "dob": "Date of Birth",
+  "microchip": "Microchip ID",
+  "noMicrochip": "Not recorded",
+  "species": {
+    "Dog": "Dog",
+    "Cat": "Cat",
+    "Bird": "Bird",
+    "Rabbit": "Rabbit",
+    "Other": "Other"
+  }
+}

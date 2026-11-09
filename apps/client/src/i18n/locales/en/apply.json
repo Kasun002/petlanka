@@ -1,0 +1,54 @@
+{
+  "title": "Register a Pet",
+  "steps": {
+    "petInfo": "Pet Info",
+    "documents": "Documents",
+    "review": "Review"
+  },
+  "petInfo": {
+    "heading": "Pet Information",
+    "name": "Pet Name",
+    "nameRequired": "Pet name is required",
+    "species": "Species",
+    "speciesRequired": "Please select a species",
+    "breed": "Breed",
+    "breedRequired": "Breed is required",
+    "dob": "Date of Birth",
+    "dobRequired": "Date of birth is required",
+    "microchip": "Microchip ID (optional)",
+    "next": "Next"
+  },
+  "documents": {
+    "heading": "Required Documents",
+    "subtitle": "Please prepare the following documents. You will submit them at the municipal office.",
+    "items": [
+      "Recent photo of the pet (clear, full body)",
+      "Vaccination certificate (within 12 months)",
+      "Previous licence (if renewal)",
+      "Owner NIC photocopy"
+    ],
+    "note": "Document upload will be available in a future update.",
+    "back": "Back",
+    "next": "Continue to Review"
+  },
+  "review": {
+    "heading": "Review & Submit",
+    "petDetails": "Pet Details",
+    "name": "Name",
+    "species": "Species",
+    "breed": "Breed",
+    "dob": "Date of Birth",
+    "microchip": "Microchip ID",
+    "none": "Not provided",
+    "back": "Back",
+    "submit": "Submit Application",
+    "submitting": "Submitting..."
+  },
+  "success": {
+    "heading": "Application Submitted!",
+    "subtitle": "Your application has been received. You will be notified when it is reviewed.",
+    "backHome": "Back to Home",
+    "viewStatus": "View Status"
+  },
+  "selectSpecies": "Select species"
+}
