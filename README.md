@@ -41,11 +41,12 @@ The repository is structured to accommodate an `apps/ai-service/` directory with
 
 | Layer | Technology |
 |-------|-----------|
-| Monorepo | Turborepo + pnpm workspaces |
-| Backend | NestJS 11, TypeScript 5 |
-| ORM | Prisma 6 (PostgreSQL) |
-| Client frontend | React 19, Vite 8, Tailwind CSS 3, Axios |
-| Admin frontend | React 19, Vite 8, Tailwind CSS 3, Axios |
+| Monorepo | Turborepo 2 + pnpm 10 workspaces |
+| Backend | NestJS 10, TypeScript 5, Passport JWT |
+| ORM | Prisma 7 (PostgreSQL, `@prisma/adapter-pg`) |
+| Client frontend | React 19, Vite 8, Tailwind CSS 3, Axios, React Hook Form |
+| Admin frontend | React 19, Vite 8, Tailwind CSS 3, Axios, React Hook Form |
+| Shared types | `@petlanka/types` — auth interfaces, validation constants |
 | Backend tests | Jest 29 + Supertest |
 | Frontend tests | Vitest 3 + Testing Library |
 | E2E tests | Playwright 1.49 |
@@ -72,11 +73,10 @@ pnpm install
 ### 2. Configure environment
 
 ```bash
-cp .env.example .env
-# Edit .env if needed — defaults work with Docker Compose
 cp apps/backend/.env.example apps/backend/.env
-cp apps/client/.env.example apps/client/.env
-cp apps/admin/.env.example apps/admin/.env
+cp apps/client/.env.example  apps/client/.env
+cp apps/admin/.env.example   apps/admin/.env
+# Defaults work out of the box for local dev — edit DATABASE_URL if your Postgres differs
 ```
 
 ### 3. Start PostgreSQL
@@ -85,22 +85,18 @@ cp apps/admin/.env.example apps/admin/.env
 docker compose up -d postgres
 ```
 
-### 4. Run database migrations
+### 4. Run database migrations + generate client
 
 ```bash
-pnpm --filter @petlanka/backend db:migrate
+pnpm --filter @petlanka/backend db:migrate    # prisma migrate dev
+# Prisma 7 generates the client automatically after migrate
 ```
 
-### 5. Generate Prisma client
-
-```bash
-pnpm --filter @petlanka/backend db:generate
-```
-
-### 6. Seed the database (creates SUPER_ADMIN)
+### 5. Seed the database
 
 ```bash
 pnpm --filter @petlanka/backend db:seed
+# Creates one SUPER_ADMIN: admin@petlanka.lk / changeme123!
 ```
 
 ---
@@ -194,19 +190,114 @@ pnpm --filter @petlanka/e2e test:ui
 
 ## Environment configuration
 
+### `apps/backend/.env`
+
 | Variable | Description |
 |----------|-------------|
 | `DATABASE_URL` | PostgreSQL connection string |
-| `PORT` | Backend port (default: 3000) |
+| `PORT` | Backend port (default: `3000`) |
 | `NODE_ENV` | `development` / `test` / `production` |
+| `CORS_ORIGINS` | Comma-separated allowed FE origins (e.g. `http://localhost:5173,http://localhost:5174`) |
 | `JWT_SECRET` | Access token signing secret (min 32 chars) |
 | `JWT_REFRESH_SECRET` | Refresh token signing secret (min 32 chars) |
 | `SEED_ADMIN_EMAIL` | Email for the seeded SUPER_ADMIN account |
 | `SEED_ADMIN_PASSWORD` | Password for the seeded SUPER_ADMIN account |
-| `VITE_API_BASE_URL` | API base URL used by frontend apps |
+
+### `apps/client/.env` + `apps/admin/.env`
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_BASE_URL` | API base URL (default: `http://localhost:3000/api`) |
+
+### E2E (`tests/e2e/.env`)
+
+| Variable | Description |
+|----------|-------------|
 | `E2E_BASE_URL` | Backend base URL for E2E tests |
 | `E2E_CLIENT_URL` | Client app URL for E2E tests |
 | `E2E_ADMIN_URL` | Admin app URL for E2E tests |
+
+---
+
+## Auth
+
+### Client (OTP / passwordless)
+
+```
+POST /api/v1/client/auth/otp/request   { phone | email }         → OTP sent (console.log in dev)
+POST /api/v1/client/auth/otp/verify    { phone | email, code }   → tokens + isNewUser flag
+POST /api/v1/client/auth/register      (Bearer) { fullName, nic, province, district, city, streetAddress }
+POST /api/v1/client/auth/refresh       { refreshToken }
+POST /api/v1/client/auth/logout        (Bearer)
+```
+
+### Admin (email + password)
+
+```
+POST /api/v1/admin/auth/login    { email, password }   → tokens + admin profile
+POST /api/v1/admin/auth/refresh  { refreshToken }
+POST /api/v1/admin/auth/logout   (Bearer)
+```
+
+Default dev credentials (after seed): `admin@petlanka.lk` / `changeme123!`
+
+### Token flow
+
+- Access token: 15 min JWT, sent as `Authorization: Bearer <token>`
+- Refresh token: stored hashed in PostgreSQL, rotated on every use
+- FE stores tokens in `localStorage`; Axios interceptor attaches the Bearer header and auto-refreshes on 401
+
+### CORS
+
+Allowed origins come from `CORS_ORIGINS` in `apps/backend/.env`:
+
+```
+# local dev (default)
+CORS_ORIGINS=http://localhost:5173,http://localhost:5174
+
+# production
+CORS_ORIGINS=https://petlanka.lk,https://admin.petlanka.lk
+```
+
+---
+
+## Shared Package — `@petlanka/types`
+
+Exports types and validation constants shared across backend DTOs and FE form validation:
+
+```ts
+// Auth response shapes
+AuthTokens, OtpRequestResponse, OtpVerifyResponse, AdminLoginResponse, AuthenticatedUser, RoleName
+
+// Validation (used in @Matches() decorators + React Hook Form rules)
+NIC_REGEX, NIC_REGEX_MESSAGE          // 9 digits + V/X (old) or 12 digits (new)
+SL_PHONE_REGEX, SL_PHONE_REGEX_MESSAGE  // +94XXXXXXXXX
+
+// Router state
+OtpIdentifierType, OtpVerifyRouteState
+```
+
+Vite dev servers resolve `@petlanka/types` from source (`src/index.ts`) via a Vite alias — no rebuild needed during development. After editing types for production build: `pnpm --filter @petlanka/types build`.
+
+---
+
+## Project Status
+
+| Area | Status |
+|------|--------|
+| Monorepo scaffolding | ✅ Complete |
+| Prisma schema + migrations (v7) | ✅ Complete |
+| Backend auth — OTP + JWT + RBAC | ✅ Complete |
+| Sri Lanka address validation (JSON) | ✅ Complete |
+| Client FE auth screens + React Hook Form | ✅ Complete |
+| Admin FE auth screen + React Hook Form | ✅ Complete |
+| Shared validation constants (`@petlanka/types`) | ✅ Complete |
+| CORS configuration | ✅ Complete |
+| OTP delivery (real SMS/email provider) | ⬜ Pending |
+| Rate limiting on `otp/request` | ⬜ Pending |
+| `/me` endpoint (resolve user ID post-login) | ⬜ Pending |
+| Logout UI in app shell | ⬜ Pending |
+| E2E auth tests | ⬜ Pending |
 
 ---
 

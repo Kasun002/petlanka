@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "home": "Home",
+    "myPets": "My Pets",
+    "apply": "Apply",
+    "profile": "Profile"
+  },
+  "header": {
+    "greeting": "Good morning"
+  }
+}

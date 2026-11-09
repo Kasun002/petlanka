@@ -1,4 +1,5 @@
 import { IsEmail, IsMobilePhone, IsOptional, Matches } from 'class-validator';
+import { NIC_REGEX, NIC_REGEX_MESSAGE } from '@petlanka/types';
 
 export class RequestOtpDto {
   @IsOptional()
@@ -10,6 +11,6 @@ export class RequestOtpDto {
   phone?: string;
 
   @IsOptional()
-  @Matches(/^(\d{9}[VXvx]|\d{12})$/, { message: 'invalid NIC format' })
+  @Matches(NIC_REGEX, { message: NIC_REGEX_MESSAGE })
   nic?: string;
 }

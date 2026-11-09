@@ -1,0 +1,16 @@
+{
+  "stats": [
+    { "id": "pets",     "value": "12,486",    "label": "Registered pets",     "iconColor": "#0F7A63", "iconBg": "#E3F2ED" },
+    { "id": "licences", "value": "10,902",    "label": "Active licences",      "iconColor": "#1E8A5F", "iconBg": "#E5F5EC" },
+    { "id": "pending",  "value": "7",         "label": "Pending applications", "iconColor": "#B4740C", "iconBg": "#FCF0DA" },
+    { "id": "revenue",  "value": "Rs. 1.84M", "label": "Revenue this month",   "iconColor": "#2461C7", "iconBg": "#EAF2FB" }
+  ],
+  "recentApplications": [
+    { "id": "a1", "applicant": "M. Fernando",    "pet": "Milo (Dog)",  "type": "New",      "district": "Colombo",  "submitted": "18 Sep 2026", "status": "PENDING"  },
+    { "id": "a2", "applicant": "S. Jayawardena", "pet": "Coco (Cat)",  "type": "Renewal",  "district": "Gampaha",  "submitted": "17 Sep 2026", "status": "PENDING"  },
+    { "id": "a3", "applicant": "R. Bandara",     "pet": "Tiger (Dog)", "type": "New",      "district": "Kandy",    "submitted": "16 Sep 2026", "status": "APPROVED" },
+    { "id": "a4", "applicant": "A. Silva",       "pet": "Bella (Cat)", "type": "Transfer", "district": "Kalutara", "submitted": "15 Sep 2026", "status": "REJECTED" },
+    { "id": "a5", "applicant": "K. Perera",      "pet": "Simba (Cat)", "type": "New",      "district": "Colombo",  "submitted": "14 Sep 2026", "status": "APPROVED" }
+  ],
+  "navBadges": { "applications": 6, "assignRequests": 4 }
+}

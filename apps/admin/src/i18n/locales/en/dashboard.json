@@ -1,0 +1,13 @@
+{
+  "recentApplications": "Recent applications",
+  "viewAll": "View all →",
+  "review": "Review",
+  "table": {
+    "applicant": "Applicant",
+    "pet": "Pet",
+    "type": "Type",
+    "district": "District",
+    "submitted": "Submitted",
+    "status": "Status"
+  }
+}

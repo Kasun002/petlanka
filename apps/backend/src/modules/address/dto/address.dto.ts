@@ -1,7 +1,5 @@
 import { IsNotEmpty, IsString, Validate, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
-import provinces from '../data/provinces.json';
-import districts from '../data/districts.json';
-import cities from '../data/cities.json';
+import { provinces, districts, cities } from '@petlanka/types';
 
 @ValidatorConstraint({ name: 'sriLankaAddress', async: false })
 export class SriLankaAddressConstraint implements ValidatorConstraintInterface {

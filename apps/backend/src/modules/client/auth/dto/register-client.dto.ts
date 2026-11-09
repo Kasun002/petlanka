@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString, Matches, MinLength, Validate } from 'class-validator';
+import { NIC_REGEX, NIC_REGEX_MESSAGE } from '@petlanka/types';
 import { SriLankaAddressConstraint } from '../../../address/dto/address.dto';
 
 export class RegisterClientDto {
@@ -6,7 +7,7 @@ export class RegisterClientDto {
   @MinLength(2)
   declare fullName: string;
 
-  @Matches(/^(\d{9}[VXvx]|\d{12})$/, { message: 'invalid NIC format' })
+  @Matches(NIC_REGEX, { message: NIC_REGEX_MESSAGE })
   declare nic: string;
 
   @IsString()

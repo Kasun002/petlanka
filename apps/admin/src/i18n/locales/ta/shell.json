@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "dashboard": "டாஷ்போர்டு",
+    "applications": "விண்ணப்பங்கள்",
+    "petRegistry": "செல்ல பதிவேடு",
+    "owners": "உரிமையாளர்கள்",
+    "reports": "அறிக்கைகள்",
+    "assignRequests": "கோரிக்கைகளை ஒதுக்கவும்",
+    "usersRoles": "பயனர்கள் மற்றும் பாத்திரங்கள்",
+    "settings": "அமைப்புகள்",
+    "operations": "செயல்பாடுகள்",
+    "administration": "நிர்வாகம்",
+    "logout": "வெளியேறவும்"
+  },
+  "header": {
+    "searchPlaceholder": "விண்ணப்பங்கள், செல்லங்கள், உரிமையாளர்களை தேடவும்…"
+  }
+}
