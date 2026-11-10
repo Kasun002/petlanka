@@ -1,0 +1,28 @@
+{
+  "title": "Profile",
+  "edit": "Edit Profile",
+  "save": "Save Changes",
+  "cancel": "Cancel",
+  "saving": "Saving...",
+  "fullName": "Full Name",
+  "nic": "NIC Number",
+  "phone": "Phone",
+  "email": "Email",
+  "address": "Address",
+  "province": "Province",
+  "district": "District",
+  "city": "City",
+  "streetAddress": "Street Address",
+  "language": "Language",
+  "appSettings": "App Settings",
+  "logout": "Log Out",
+  "logoutConfirm": "Are you sure you want to log out?",
+  "myApplications": "My Applications",
+  "viewApplications": "View all applications",
+  "appStatus": {
+    "PENDING": "Pending",
+    "INFO_REQUIRED": "Info Required",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected"
+  }
+}

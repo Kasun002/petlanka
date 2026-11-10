@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Simba",
+    "species": "Cat",
+    "breed": "Domestic Shorthair",
+    "dob": "2020-03-15",
+    "microchip": "985141000123456",
+    "status": "ACTIVE",
+    "statusLabel": "Active",
+    "licenceNumber": "LK-2024-CAT-00142",
+    "licenceExpiresAt": "2025-12-31",
+    "applicationId": "app3"
+  },
+  {
+    "id": "2",
+    "name": "Rocky",
+    "species": "Dog",
+    "breed": "Sri Lankan Mix",
+    "dob": "2019-07-22",
+    "microchip": "985141000654321",
+    "status": "EXPIRES",
+    "statusLabel": "Expires 12 Oct",
+    "licenceNumber": "LK-2024-DOG-00089",
+    "licenceExpiresAt": "2025-10-12",
+    "applicationId": "app4"
+  },
+  {
+    "id": "3",
+    "name": "Milo",
+    "species": "Dog",
+    "breed": "Labrador Mix",
+    "dob": "2022-01-10",
+    "status": "PENDING",
+    "statusLabel": "Pending",
+    "applicationId": "app1"
+  },
+  {
+    "id": "4",
+    "name": "Luna",
+    "species": "Cat",
+    "breed": "Persian",
+    "dob": "2021-11-05",
+    "status": "EXPIRED",
+    "statusLabel": "Expired",
+    "licenceNumber": "LK-2023-CAT-00077",
+    "licenceExpiresAt": "2024-11-05",
+    "applicationId": "app5"
+  }
+]

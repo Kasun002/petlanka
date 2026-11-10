@@ -1,0 +1,12 @@
+{
+  "fullName": "Kasun Perera",
+  "nic": "199512345678",
+  "phone": "+94771234567",
+  "email": "kasun.perera@email.com",
+  "address": {
+    "province": "Western",
+    "district": "Colombo",
+    "city": "Colombo",
+    "streetAddress": "42/B, Galle Road, Dehiwala"
+  }
+}

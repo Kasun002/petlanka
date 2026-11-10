@@ -1,0 +1,87 @@
+[
+  {
+    "id": "app1",
+    "petId": "3",
+    "petName": "Milo",
+    "petSpecies": "Dog",
+    "status": "INFO_REQUIRED",
+    "submittedAt": "2025-10-01T08:30:00Z",
+    "updatedAt": "2025-10-14T11:00:00Z",
+    "officerNotes": [
+      {
+        "id": "note1",
+        "text": "Application received and under review.",
+        "createdAt": "2025-10-02T09:00:00Z"
+      },
+      {
+        "id": "note2",
+        "text": "Please upload a clear photo of the pet and a valid vaccination certificate dated within the last 12 months.",
+        "createdAt": "2025-10-14T11:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "app2",
+    "petId": "3",
+    "petName": "Milo",
+    "petSpecies": "Dog",
+    "status": "PENDING",
+    "submittedAt": "2025-10-20T10:00:00Z",
+    "updatedAt": "2025-10-20T10:00:00Z",
+    "officerNotes": [
+      {
+        "id": "note3",
+        "text": "Application received and queued for review.",
+        "createdAt": "2025-10-20T10:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": "app3",
+    "petId": "1",
+    "petName": "Simba",
+    "petSpecies": "Cat",
+    "status": "APPROVED",
+    "submittedAt": "2025-09-01T07:00:00Z",
+    "updatedAt": "2025-09-15T14:00:00Z",
+    "officerNotes": [
+      {
+        "id": "note4",
+        "text": "All documents verified. Licence issued.",
+        "createdAt": "2025-09-15T14:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "app4",
+    "petId": "2",
+    "petName": "Rocky",
+    "petSpecies": "Dog",
+    "status": "APPROVED",
+    "submittedAt": "2024-09-05T09:00:00Z",
+    "updatedAt": "2024-09-18T10:00:00Z",
+    "officerNotes": [
+      {
+        "id": "note5",
+        "text": "Approved. Annual licence granted.",
+        "createdAt": "2024-09-18T10:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "app5",
+    "petId": "4",
+    "petName": "Luna",
+    "petSpecies": "Cat",
+    "status": "REJECTED",
+    "submittedAt": "2024-08-10T08:00:00Z",
+    "updatedAt": "2024-08-22T12:00:00Z",
+    "officerNotes": [
+      {
+        "id": "note6",
+        "text": "Vaccination records could not be verified. Please reapply with updated documents.",
+        "createdAt": "2024-08-22T12:00:00Z"
+      }
+    ]
+  }
+]

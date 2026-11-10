@@ -10,7 +10,7 @@ interface AuthCtx {
 export const AuthContext = createContext<AuthCtx>(null!);
 export const useAuth = () => useContext(AuthContext);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [user, setUser] = useState<AuthenticatedUser | null>(() => {
     const raw = localStorage.getItem('user');
     return raw ? (JSON.parse(raw) as AuthenticatedUser) : null;
@@ -28,5 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, setAuth, clearAuth }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, setAuth, clearAuth }}>{children}</AuthContext.Provider>
+  );
 }

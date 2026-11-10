@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +48,9 @@ export default function OtpVerifyPage() {
           : { email: routeState.identifier, code },
       );
       // ponytail: id is empty until a /me endpoint exists — sub is in the JWT but not decoded here
-      setAuth({ id: '', type: 'client' }, { accessToken: res.accessToken, refreshToken: res.refreshToken });
+      flushSync(() => {
+        setAuth({ id: '', type: 'client' }, { accessToken: res.accessToken, refreshToken: res.refreshToken });
+      });
       navigate(res.isNewUser ? '/register' : '/home', { replace: true });
     } catch {
       setApiError(t('otp.invalidCode'));
